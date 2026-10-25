@@ -143,6 +143,18 @@
     box-shadow:0 0 120px 40px rgba(232,40,63,0.15);
   }
 
+  /* TRS VISION hero watch upgrade (scoped) */
+  .hero-visual .watch-hero{overflow:visible; filter:drop-shadow(0 18px 28px rgba(0,0,0,0.7)); max-width:100%; height:auto; aspect-ratio:1/1;}
+  .hero-visual .trs-dial-ring{animation:trsDialPulse 4.5s ease-in-out infinite;}
+  .hero-visual .trs-dial-rim{animation:trsDialPulse 4.5s ease-in-out infinite;}
+  @keyframes trsDialPulse{0%,100%{opacity:0.75;} 50%{opacity:1;}}
+  @media (prefers-reduced-motion:reduce){
+    .hero-visual .trs-dial-ring,.hero-visual .trs-dial-rim{animation:none;}
+  }
+  @media (max-width:600px){
+    .hero-visual .watch-hero{width:min(340px, 88%); filter:drop-shadow(0 12px 18px rgba(0,0,0,0.7));}
+  }
+
   @media (max-width:900px){
     .hero{grid-template-columns:1fr; padding-top:150px;}
     .hero-visual{order:-1;}
@@ -303,6 +315,242 @@
 </head>
 <body>
 
+<!-- ===== TRS VISION: THE GREAT WATCH WAR INTRO — START (delete from here to the matching END comment to remove the intro) ===== -->
+<style>
+#trs-intro{display:none;position:fixed;inset:0;z-index:2147483000;background:#050506;overflow:hidden;touch-action:none;font-family:'JetBrains Mono',monospace;color:#f5f3ef;user-select:none}
+html.trs-intro-active,html.trs-intro-active body{overflow:hidden}
+html.trs-intro-active #trs-intro{display:block}
+html.trs-intro-active #trs-forbidden-button,html.trs-intro-active #dial{visibility:hidden}
+#trs-intro *{pointer-events:none}
+#trs-intro .ti-skip{pointer-events:auto}
+#trs-intro.ti-out{background:transparent}
+.ti-world,.ti-dist{position:absolute;inset:0}
+.ti-stage{position:absolute;inset:-6%;background:radial-gradient(ellipse at 50% 40%,#52091a 0,#1a0509 48%,#050506 82%);animation:ti-cam 10s ease-in-out both}
+.ti-stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 4px),radial-gradient(ellipse,transparent 55%,#000 100%)}
+.ti-floor{position:absolute;left:-10%;right:-10%;top:64%;height:70%;background:repeating-linear-gradient(90deg,rgba(232,40,63,.35) 0 2px,transparent 2px 70px),repeating-linear-gradient(0deg,rgba(232,40,63,.25) 0 2px,transparent 2px 46px);transform:perspective(300px) rotateX(58deg);transform-origin:top;opacity:.6}
+.ti-lz{position:absolute;left:-20%;width:140%;height:.8vmin;background:linear-gradient(90deg,transparent,#ff4757,#fff,#ff4757,transparent);box-shadow:0 0 14px 3px #e8283f;transform:rotate(var(--a));opacity:0;animation:ti-lz var(--t) steps(1) infinite;mix-blend-mode:screen}
+.ti-w{position:absolute;width:calc(var(--s)*var(--k,1))}
+.ti-fl{transform:scaleX(var(--f,1));transform-origin:50% 100%}
+.ti-w svg{display:block;width:100%;height:auto;overflow:visible;animation:ti-bob .22s ease-in-out infinite alternate}
+.ti-w .l1,.ti-w .l2{animation:ti-lg .22s ease-in-out infinite alternate}
+.ti-w .l2,.ti-w .a2{animation-direction:alternate-reverse}
+.ti-w .a1,.ti-w .a2{animation:ti-ar .3s ease-in-out infinite alternate}
+.ti-w .a2{animation-direction:alternate-reverse}
+.mA{animation:ti-mA .9s ease-in-out infinite alternate}
+.mB{animation:ti-mB .85s ease-in-out infinite alternate}
+.mC{animation:ti-mC 1s ease-in-out infinite alternate}
+.mD{animation:ti-mD 2.2s ease-in-out infinite}
+.mE{animation:ti-mE .45s ease-in-out infinite alternate}
+.ti-say{position:absolute;bottom:100%;left:50%;width:max-content;max-width:36vmin;padding:.9vmin 1.4vmin;border-radius:1.2vmin;background:#f5f3ef;color:#111;font:700 clamp(9px,2vmin,14px)/1.25 'JetBrains Mono',monospace;text-align:center;opacity:0;transform:translateX(-50%) scale(.6);transition:opacity .15s,transform .2s;transform-origin:50% 100%}
+.ti-say.on{opacity:1;transform:translateX(-50%) scale(1)}
+.ti-s3 .ti-w.conf{animation:none}
+.ti-s3 .ti-w.conf svg,.ti-s3 .ti-w.conf g{animation:none}
+.ti-s3 .ti-w.conf::after{content:"?!";position:absolute;right:-6%;top:-14%;font:900 6vmin 'Bebas Neue',sans-serif;color:#ffe135;text-shadow:0 0 12px #ffe135}
+.ti-s2 .ti-hero .ti-fl{animation:ti-hd 1.6s .45s both}
+.ti-s4 .ti-fl{animation:ti-duck .25s ease-in-out infinite alternate}
+.ti-ex{position:absolute;width:0;height:0}
+.ti-ex u{position:absolute;width:var(--z);height:var(--z);margin:calc(var(--z)/-2) 0 0 calc(var(--z)/-2);border-radius:50%;background:radial-gradient(circle,#fff 0,#ffd23f 22%,#ff4757 50%,transparent 70%);mix-blend-mode:screen;animation:ti-ex .7s ease-out both}
+.ti-ex b{position:absolute;width:var(--z);height:var(--z);margin:calc(var(--z)/-2) 0 0 calc(var(--z)/-2);border-radius:50%;background:radial-gradient(circle,rgba(110,110,120,.7),rgba(30,30,36,.5) 45%,transparent 70%);filter:blur(5px);animation:ti-sm 1.1s ease-out both}
+.ti-ex i{position:absolute;width:1vmin;height:1vmin;background:#ffd23f;box-shadow:0 0 8px #ff8a00;transform:rotate(var(--a));animation:ti-sp .6s ease-out both}
+.ti-pow{position:absolute;z-index:2;font:400 9vmin 'Bebas Neue',sans-serif;letter-spacing:.04em;color:#ffe135;-webkit-text-stroke:.35vmin #111;transform:translate(-50%,-50%) rotate(var(--t));animation:ti-pow .65s ease-out both}
+.ti-pow::before{content:"";position:absolute;inset:-45% -35%;z-index:-1;background:#e8283f;clip-path:polygon(50% 0,61% 28%,92% 18%,72% 43%,100% 60%,68% 64%,70% 98%,50% 76%,30% 98%,32% 64%,0 60%,28% 43%,8% 18%,39% 28%)}
+.ti-bl{position:absolute;width:7vmin;height:1.3vmin;border-radius:1vmin;background:linear-gradient(90deg,transparent,#ff4757 40%,#ffe9a8 85%,#fff);box-shadow:0 0 10px 2px #ff4757;transform:rotate(var(--r));animation:ti-bf .7s linear both}
+.ti-ban,.ti-sli{position:absolute;left:0;opacity:0}
+.ti-ban{top:22%;width:15vmin}
+.ti-sli{top:36%;width:28vmin}
+.ti-ban svg,.ti-sli svg{display:block;width:100%;height:auto;overflow:visible}
+.ti-ban::before,.ti-sli::before{content:"";position:absolute;top:35%;height:22%;border-radius:50%;filter:blur(2px)}
+.ti-ban::before{right:70%;width:55vmin;background:linear-gradient(90deg,transparent,rgba(255,225,53,.7) 60%,#fff8c4)}
+.ti-sli::before{left:80%;width:90vmin;background:linear-gradient(270deg,transparent,rgba(255,71,87,.8) 50%,#fff)}
+.ti-s3 .ti-ban{animation:ti-banf 1.5s cubic-bezier(.3,.1,.3,1) both}
+.ti-s3 .ti-ban svg,.ti-s4 .ti-sli svg{animation:ti-spin .3s linear infinite}
+.ti-s4 .ti-sli{animation:ti-slf 1s .8s cubic-bezier(.2,.9,.2,1) both}
+.ti-s5 .ti-ban{animation:none;opacity:1;transform:translate(66vw,-4vh) rotate(18deg)}
+.ti-s5 .ti-sli{animation:none;opacity:1;transform:translate(10vw,-12vh) rotate(-12deg) scale(1.4)}
+.ti-s5 .ti-ban::before,.ti-s5 .ti-sli::before{display:none}
+.ti-s5 .ti-world *,.ti-s5 .ti-world *::before,.ti-s5 .ti-world *::after{animation-play-state:paused!important}
+.ti-s5 .ti-world{animation:ti-gl .55s steps(2)}
+.ti-s6 .ti-world{animation:ti-van .7s ease-in both}
+.ti-dist.on{animation:ti-dist .75s both}
+.ti-world.ti-sh1{animation:ti-sh1 .34s}.ti-world.ti-sh2{animation:ti-sh2 .34s}.ti-world.ti-sh3{animation:ti-sh3 .95s}
+.ti-lb{position:absolute;left:0;right:0;height:7vh;background:#000;z-index:3;transition:transform .5s}
+.ti-lb.t{top:0}.ti-lb.b{bottom:0}
+.ti-s6 .ti-lb.t{transform:translateY(-100%)}.ti-s6 .ti-lb.b{transform:translateY(100%)}
+.ti-title{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:400 clamp(40px,12vmin,120px)/.95 'Bebas Neue',sans-serif;letter-spacing:.08em;text-shadow:0 0 30px #e8283f;animation:ti-title 1.9s both}
+.ti-title small{font:700 clamp(9px,2vmin,14px) 'JetBrains Mono',monospace;letter-spacing:.4em;color:#ff4757;margin-bottom:2vmin}
+.ti-title span{color:#ff4757}
+.ti-warn{position:absolute;z-index:6;left:50%;top:13%;transform:translateX(-50%);width:max-content;max-width:90vw;padding:1.2vmin 2.4vmin;background:rgba(14,2,4,.9);border:1px solid #ff4757;box-shadow:0 0 24px #e8283f88;color:#ff4757;font:800 clamp(10px,2.4vmin,17px)/1.3 'JetBrains Mono',monospace;letter-spacing:.12em;text-align:center;opacity:0}
+.ti-warn.on{opacity:1;animation:ti-blink .28s 2}
+.ti-wh{position:absolute;z-index:6;left:50%;top:38%;font:400 26vmin/1 'Bebas Neue',sans-serif;color:#ffe135;-webkit-text-stroke:.8vmin #e8283f;text-shadow:1.2vmin 1.2vmin 0 #111;white-space:nowrap;opacity:0;transform:translateX(-50%) skewX(-14deg)}
+.ti-wh.on{animation:ti-wh .95s ease-in both}
+.ti-flash{position:absolute;inset:0;z-index:6;opacity:0;background:radial-gradient(circle,#fff,#ff4757 55%,transparent);mix-blend-mode:screen}
+.ti-flash.on{animation:ti-fl .38s ease-out}
+.ti-panel{position:absolute;z-index:7;left:50%;top:27%;transform:translate(-50%,-50%) scale(.94);width:min(560px,90vw);padding:2.4vmin 3vmin 3vmin;text-align:center;background:linear-gradient(160deg,rgba(26,4,9,.95),rgba(6,6,8,.97));border:1px solid #e8283f;box-shadow:inset 0 0 34px rgba(232,40,63,.22);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));opacity:0;transition:opacity .35s .45s,transform .45s .45s}
+.ti-s5 .ti-panel,.ti-rm .ti-panel{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ti-s6 .ti-panel{opacity:0;transition:opacity .25s}
+.ti-ph{font:700 clamp(9px,1.9vmin,13px)/1.4 'JetBrains Mono',monospace;letter-spacing:.2em;color:#ff4757;border-bottom:1px solid rgba(232,40,63,.4);padding-bottom:1.2vmin;margin-bottom:2vmin}
+.ti-pb{font:400 clamp(30px,7vmin,54px)/1.05 'Bebas Neue',sans-serif;letter-spacing:.06em}
+.ti-pb em{display:block;color:#ff4757;font-style:normal}
+.ti-pbar{height:3px;margin-top:2vmin;background:linear-gradient(90deg,#e8283f,#fff,#e8283f);transform:scaleX(0);transform-origin:left}
+.ti-s5 .ti-pbar{animation:ti-pbar 1.5s .45s linear both}
+.ti-d1,.ti-d2{position:absolute;left:0;right:0;height:50.5%;background:#050506;z-index:8;visibility:hidden}
+.ti-d1{top:0;border-bottom:2px solid #ff4757;box-shadow:0 6px 34px #e8283f}
+.ti-d2{bottom:0;border-top:2px solid #ff4757;box-shadow:0 -6px 34px #e8283f}
+.ti-out .ti-d1,.ti-out .ti-d2{visibility:visible}
+.ti-out .ti-d1{animation:ti-d1 .8s cubic-bezier(.7,0,.2,1) both}
+.ti-out .ti-d2{animation:ti-d2 .8s cubic-bezier(.7,0,.2,1) both}
+.ti-out .ti-skip{display:none}
+.ti-skip{position:absolute;z-index:9;top:max(14px,env(safe-area-inset-top));right:14px;min-height:40px;padding:0 16px;background:rgba(10,0,2,.8);border:1px solid #e8283f;color:#f5f3ef;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.2em;cursor:pointer}
+.ti-skip:hover,.ti-skip:focus-visible{background:#e8283f}
+.ti-rm .ti-world,.ti-rm .ti-title,.ti-rm .ti-lb,.ti-rm .ti-warn,.ti-rm .ti-wh,.ti-rm .ti-flash{display:none}
+@media (max-aspect-ratio:1/1){.ti-w{--k:1.6}.ti-ban{width:24vmin}.ti-sli{width:42vmin}}
+@keyframes ti-cam{0%{transform:scale(1.5) rotate(-3deg)}12%{transform:scale(1.05) translate(2%,0)}20%{transform:scale(1.2) rotate(1.5deg) translate(-3%,1%)}33%{transform:scale(1.1) translate(1%,0)}45%{transform:scale(1.35) translate(-4%,-1%) rotate(-1deg)}55%{transform:scale(1.05)}70%{transform:scale(1.25) rotate(2deg)}100%{transform:scale(1.1)}}
+@keyframes ti-lz{0%{opacity:0}10%{opacity:.9}18%{opacity:0}58%{opacity:.8}66%,100%{opacity:0}}
+@keyframes ti-bob{to{transform:translateY(-4%)}}
+@keyframes ti-lg{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes ti-ar{from{transform:rotate(-30deg)}to{transform:rotate(38deg)}}
+@keyframes ti-mA{to{transform:translateX(14vw)}}
+@keyframes ti-mB{0%{transform:translate(0,0)}50%{transform:translate(-5vw,-16vmin) rotate(-18deg)}100%{transform:translate(-10vw,0)}}
+@keyframes ti-mC{to{transform:translateX(-16vw)}}
+@keyframes ti-mD{0%,55%{transform:none}62%{transform:rotate(30deg)}70%,88%{transform:translateY(5vmin) rotate(88deg)}100%{transform:none}}
+@keyframes ti-mE{to{transform:translateX(-6vw) rotate(-6deg)}}
+@keyframes ti-hd{0%,100%{transform:scaleX(1)}20%,70%{transform:rotate(-70deg) scale(1.3) translateY(8%)}}
+@keyframes ti-duck{0%{transform:scaleX(var(--f,1))}100%{transform:scaleX(var(--f,1)) translateY(26%) scaleY(.62)}}
+@keyframes ti-ex{0%{transform:scale(.1);opacity:1}60%{opacity:1}100%{transform:scale(1.7);opacity:0}}
+@keyframes ti-sm{0%{transform:scale(.4) translateY(0);opacity:.9}100%{transform:scale(1.8) translateY(-60%);opacity:0}}
+@keyframes ti-sp{to{transform:rotate(var(--a)) translateX(calc(var(--z)*.9));opacity:0}}
+@keyframes ti-pow{0%{transform:translate(-50%,-50%) rotate(var(--t)) scale(.2);opacity:0}25%{transform:translate(-50%,-50%) rotate(var(--t)) scale(1.25);opacity:1}100%{transform:translate(-50%,-50%) rotate(var(--t)) scale(1);opacity:0}}
+@keyframes ti-bf{from{transform:translate(0,0) rotate(var(--r))}to{transform:translate(var(--dx),var(--dy)) rotate(var(--r))}}
+@keyframes ti-banf{from{opacity:1;transform:translate(-25vw,8vh)}to{opacity:1;transform:translate(125vw,-10vh)}}
+@keyframes ti-slf{from{opacity:1;transform:translate(130vw,0) scale(2)}to{opacity:1;transform:translate(-190vw,-8vh) scale(2.2)}}
+@keyframes ti-spin{to{transform:rotate(360deg)}}
+@keyframes ti-dist{25%{transform:scale(1.15,.85) skewX(12deg);filter:blur(3px) hue-rotate(40deg) contrast(1.6)}50%{transform:scale(.9,1.2) skewX(-14deg);filter:blur(1px) invert(.25)}75%{transform:scale(1.08,.95) skewX(5deg)}}
+@keyframes ti-sh1{0%,100%{transform:none}25%{transform:translate(-1.2%,.8%)}50%{transform:translate(1.2%,-.8%)}75%{transform:translate(-.8%,-.6%)}}
+@keyframes ti-sh2{0%,100%{transform:none}25%{transform:translate(2%,-1.4%) rotate(.4deg)}50%{transform:translate(-2%,1.4%) rotate(-.4deg)}75%{transform:translate(1.4%,1%)}}
+@keyframes ti-sh3{0%,100%{transform:none}10%{transform:translate(-4%,2.5%) rotate(-1.2deg)}25%{transform:translate(4%,-3%) rotate(1.2deg)}40%{transform:translate(-3%,-2%) rotate(-.8deg)}55%{transform:translate(3%,2%) rotate(.8deg)}75%{transform:translate(-1.5%,1%)}}
+@keyframes ti-gl{0%{transform:none}20%{transform:translate(-2.5%,0) skewX(6deg);filter:hue-rotate(90deg) saturate(3)}40%{transform:translate(3%,-1%);clip-path:inset(20% 0 40% 0)}60%{transform:translate(-1%,1%);clip-path:inset(60% 0 5% 0)}80%{filter:invert(1)}100%{transform:none}}
+@keyframes ti-van{0%{filter:none}40%{filter:brightness(4) saturate(0);transform:scale(1.05)}100%{opacity:0;transform:scale(1.6);filter:blur(14px)}}
+@keyframes ti-title{0%{opacity:0;transform:scale(1.5);letter-spacing:.3em}15%{opacity:1;transform:scale(1);letter-spacing:.08em}75%{opacity:1}100%{opacity:0;transform:scale(.9)}}
+@keyframes ti-blink{50%{opacity:.35}}
+@keyframes ti-wh{0%{opacity:0;transform:translateX(60vw) skewX(-14deg) scale(.3)}25%{opacity:1;transform:translateX(-10%) skewX(-14deg) scale(1.2)}70%{opacity:1;transform:translateX(-60%) skewX(-14deg) scale(1.35)}100%{opacity:0;transform:translateX(-170%) skewX(-14deg) scale(1.6)}}
+@keyframes ti-fl{0%{opacity:.85}100%{opacity:0}}
+@keyframes ti-pbar{to{transform:scaleX(1)}}
+@keyframes ti-d1{to{transform:translateY(-101%)}}
+@keyframes ti-d2{to{transform:translateY(101%)}}
+</style>
+<noscript><style>#trs-intro{display:none!important}</style></noscript>
+<div id="trs-intro" role="dialog" aria-modal="true" aria-label="TRS VISION intro animation">
+  <div class="ti-world"><div class="ti-dist"><div class="ti-stage">
+    <div class="ti-floor"></div>
+    <i class="ti-lz" style="--a:-14deg;--t:.9s;top:40%"></i><i class="ti-lz" style="--a:11deg;--t:1.3s;top:55%;animation-delay:-.4s"></i>
+    <i class="ti-lz" style="--a:-4deg;--t:.7s;top:70%;animation-delay:-.2s"></i><i class="ti-lz" style="--a:22deg;--t:1.1s;top:30%;animation-delay:-.7s"></i>
+    <div id="ti-cast"></div>
+    <div class="ti-ban"><svg viewBox="0 0 120 70"><path d="M8 12Q12 62 68 64Q100 62 116 36Q96 52 66 46Q30 42 24 6Z" fill="#ffe135" stroke="#b88a00" stroke-width="3" stroke-linejoin="round"/><rect x="6" y="2" width="14" height="12" rx="3" fill="#6b4a12" transform="rotate(-8 12 8)"/><circle cx="116" cy="36" r="3.5" fill="#3a2a08"/></svg></div>
+    <div class="ti-sli"><svg viewBox="0 0 160 70"><path d="M10 38C10 14 40 6 80 8C128 10 154 20 152 38C150 56 120 62 80 62C40 62 10 58 10 38Z" fill="#ff4757" stroke="#7a0f1c" stroke-width="4"/><ellipse cx="80" cy="36" rx="58" ry="20" fill="#ff7a86" opacity=".45"/><path d="M122 36L70 14M122 36L70 60" stroke="#f5f3ef" stroke-width="8" stroke-linecap="round"/><circle cx="122" cy="36" r="6" fill="#f5f3ef" stroke="#7a0f1c" stroke-width="2"/></svg></div>
+  </div></div></div>
+  <div class="ti-lb t"></div><div class="ti-lb b"></div>
+  <div class="ti-title"><small>TRS VISION PRESENTS</small>THE GREAT <span>WATCH</span> WAR</div>
+  <div class="ti-warn" id="ti-warn" role="status"></div>
+  <div class="ti-wh">WHOOSH!</div>
+  <div class="ti-flash"></div>
+  <div class="ti-panel"><div class="ti-ph">● SYSTEM BROADCAST // EMERGENCY INTERRUPTION</div><div class="ti-pb">HEY, GUYS. STOP.<em>WE HAVE A GUEST.</em></div><div class="ti-pbar"></div></div>
+  <div class="ti-d1"></div><div class="ti-d2"></div>
+  <button type="button" class="ti-skip" id="ti-skip">SKIP INTRO ▸</button>
+</div>
+<script>
+(function(){
+  var d=document,h=d.documentElement,o=d.getElementById('trs-intro');
+  if(!o)return;
+  var KEY='trs-intro-seen',T=[],I=[],done=false,ph=0,tk=0;
+  function finish(){
+    if(done)return;done=true;
+    T.forEach(clearTimeout);I.forEach(clearInterval);
+    try{sessionStorage.setItem(KEY,'1')}catch(e){}
+    h.classList.remove('trs-intro-active');
+    if(o.parentNode)o.parentNode.removeChild(o);
+  }
+  var seen=false;try{seen=sessionStorage.getItem(KEY)==='1'}catch(e){}
+  if(seen){finish();return}
+  try{
+    h.classList.add('trs-intro-active');
+    function q(s){return o.querySelector(s)}
+    var skip=q('#ti-skip'),world=q('.ti-world'),dist=q('.ti-dist'),stage=q('.ti-stage'),cast=q('#ti-cast'),warn=q('#ti-warn'),wh=q('.ti-wh'),fl=q('.ti-flash');
+    skip.addEventListener('click',finish);
+    o.addEventListener('keydown',function(e){if(e.key==='Escape')finish();else if(e.key==='Tab'){e.preventDefault();skip.focus()}});
+    skip.focus({preventScroll:true});
+    T.push(setTimeout(finish,12500)); /* failsafe: intro can never get stuck */
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){
+      o.classList.add('ti-rm');T.push(setTimeout(finish,2800));return;
+    }
+    function r(a,b){return a+Math.random()*(b-a)}
+    function kick(el,c,ms){el.classList.remove(c);void el.offsetWidth;el.classList.add(c);T.push(setTimeout(function(){el.classList.remove(c)},ms))}
+    function add(c,css,html,life){var e=d.createElement('div');e.className=c;e.style.cssText=css;if(html)e.innerHTML=html;stage.appendChild(e);T.push(setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e)},life))}
+    function boom(){var s='';for(var i=0;i<8;i++)s+='<i style="--a:'+(i*45+r(-12,12))+'deg"></i>';add('ti-ex','left:'+r(6,94)+'%;top:'+r(28,82)+'%;--z:'+r(9,22)+'vmin','<b></b><u></u>'+s,1100)}
+    var PW=['POW!','BAM!','ZAP!','KRAK!','BONK!','KABLAM!'];
+    function pow(){add('ti-pow','left:'+r(10,90)+'%;top:'+r(30,75)+'%;--t:'+r(-14,14)+'deg',PW[Math.random()*PW.length|0],650)}
+    function shake(n){kick(world,'ti-sh'+n,n===3?950:340)}
+    function bullet(){var l=Math.random()<.5;add('ti-bl','top:'+r(28,84)+'%;left:'+(l?'-14%':'114%')+';--dx:'+(l?'140vw':'-140vw')+';--dy:'+r(-9,9)+'vh;--r:'+(l?0:180)+'deg;animation-duration:'+r(.45,.9)+'s',0,1000)}
+    function ws(c,x){
+      var P='stroke-linecap="round"';
+      return '<svg viewBox="0 0 100 150" fill="none" stroke-linecap="round" stroke-linejoin="round">'+
+      (x==='c'?'<path d="M30 46L6 118 50 100 94 118 70 46Z" fill="#e8283f" stroke="#7a0f1c" stroke-width="2"/>':'')+
+      '<g class="l1" style="transform-origin:43px 98px"><path d="M43 98L40 128H29" stroke="#f5f3ef" stroke-width="6"/></g>'+
+      '<g class="l2" style="transform-origin:57px 98px"><path d="M57 98L60 128H71" stroke="#f5f3ef" stroke-width="6"/></g>'+
+      '<rect x="39" y="0" width="22" height="30" rx="5" fill="#1b1b1e" stroke="#444"/><rect x="39" y="78" width="22" height="26" rx="5" fill="#1b1b1e" stroke="#444"/>'+
+      '<g class="a1" style="transform-origin:22px 58px"><path d="M23 58L7 76" stroke="#f5f3ef" stroke-width="5"/></g>'+
+      '<g class="a2" style="transform-origin:78px 58px"><path d="M77 58L93 40" stroke="#f5f3ef" stroke-width="5"/><circle cx="94" cy="38" r="4" fill="#e8283f"/></g>'+
+      '<rect x="80" y="49" width="7" height="10" rx="2" fill="'+c+'"/><circle cx="50" cy="54" r="31" fill="'+c+'" stroke="#111" stroke-width="3"/>'+
+      '<circle cx="50" cy="54" r="25" fill="#0b0b0d"/><ellipse cx="40" cy="52" rx="6" ry="7.5" fill="#fff"/><ellipse cx="60" cy="52" rx="6" ry="7.5" fill="#fff"/>'+
+      '<circle cx="42" cy="53" r="3" fill="#111"/><circle cx="58" cy="53" r="3" fill="#111"/><path d="M31 41L47 47M69 41L53 47" stroke="#ff4757" stroke-width="4.5"/>'+
+      '<path d="M41 66Q50 76 59 66Z" fill="#e8283f" stroke="#fff" stroke-width="1.5"/>'+
+      (x==='h'?'<path d="M21 46A29 29 0 0 1 79 46Z" fill="#3b3f45" stroke="#111" stroke-width="2"/>':'')+
+      (x==='b'?'<path d="M21 37H79" stroke="#e8283f" stroke-width="6"/><path d="M79 37L92 29M79 37L93 43" stroke="#e8283f" stroke-width="4"/>':'')+'</svg>';
+    }
+    var C=[['#cfd3d8','c',9,54,19,'A',1],['#8a8f98','h',30,60,15,'B',-1],['#d4a72c','b',50,52,17,'E',-1],['#f0ece4','',70,62,13,'D',-1],['#a3182b','',85,56,18,'C',-1]];
+    cast.innerHTML=C.map(function(a,i){return '<div class="ti-w m'+a[5]+(i?'':' ti-hero')+'" style="left:'+a[2]+'%;top:'+a[3]+'%;--s:'+a[4]+'vmin;--f:'+a[6]+'"><div class="ti-fl">'+ws(a[0],a[1])+'</div><span class="ti-say"></span></div>'}).join('');
+    var Ws=cast.children;
+    function say(i,t,ms){var s=Ws[i].lastChild;s.textContent=t;s.classList.add('on');if(ms)T.push(setTimeout(function(){s.classList.remove('on')},ms))}
+    function set(n){if(ph)o.classList.remove('ti-s'+ph);ph=n;o.classList.add('ti-s'+n);kick(fl,'on',380)}
+    function at(ms,f){T.push(setTimeout(function(){try{f()}catch(e){}},ms))}
+    function wr(t,ms){warn.textContent='\u26A0 '+t;kick(warn,'on',ms)}
+    set(1);
+    I.push(setInterval(function(){
+      tk++;
+      if(ph===1||ph===2){
+        if(tk%2===0)boom();
+        if(tk%(ph===2?1:3)===0)bullet();
+        if(ph===2&&tk%4===0){pow();shake(1)}
+        if(ph===1&&tk%5===0)pow();
+      }else if(ph===3||ph===4){
+        if(tk%3===0)boom();
+        if(tk%3===1)bullet();
+      }
+    },140));
+    at(350,function(){shake(1)});at(1300,function(){shake(2)});
+    at(2000,function(){set(2);shake(2)});
+    at(2550,function(){add('ti-bl','top:64%;left:-14%;--dx:140vw;--dy:0vh;--r:0deg;animation-duration:.9s',0,1000);say(0,'TOO SLOW. \uD83D\uDE0E',1500);shake(1)});
+    at(3300,function(){set(3)});
+    at(3700,function(){Ws[1].classList.add('conf');say(1,'\u2026BANANA?',1100);wr('UNIDENTIFIED BANANA DETECTED.',850)});
+    at(4600,function(){wr('WHY IS THERE A BANANA IN A WAR ZONE?',1100)});
+    at(5000,function(){set(4);wr('WARNING: SLIPPER INCOMING.',450)});
+    at(5500,function(){wr('SLIPPER VELOCITY EXCEEDS LEGAL LIMITS.',420)});
+    at(5950,function(){wr('ALL WATCHES: TAKE COVER.',400)});
+    at(6050,function(){kick(wh,'on',950)});
+    at(6200,function(){kick(dist,'on',750)});
+    at(6250,function(){shake(3)});
+    at(6400,function(){wr('CRITICAL ERROR: WE CANNOT STOP THE SLIPPER.',550)});
+    at(7000,function(){world.classList.remove('ti-sh1','ti-sh2','ti-sh3');set(5)});
+    at(7900,function(){say(1,'HIDE THE BANANA. ACT NORMAL.')});
+    at(8500,function(){say(3,'WHAT BANANA?')});
+    at(9000,function(){set(6)});
+    at(9700,function(){o.classList.add('ti-out')});
+    at(10500,finish);
+  }catch(err){finish()}
+})();
+</script>
+<!-- ===== TRS VISION: THE GREAT WATCH WAR INTRO — END ===== -->
+
+
 <!-- Signature scroll dial -->
 <div id="dial" aria-hidden="true">
   <svg viewBox="0 0 56 56">
@@ -323,7 +571,13 @@
       <a href="#about">About</a>
       <a href="#join">Contact</a>
     </div>
-    <a href="#join" class="subscribe-btn">▶ Subscribe</a>
+    <div class="trs-nav-actions">
+      <button type="button" class="trs-cart-btn" id="trs-cart-open" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 4h2.4l2.3 10.4a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L20 8H6.3"/></svg>
+        <span class="trs-cart-count" id="trs-cart-count" hidden>0</span>
+      </button>
+      <a href="#join" class="subscribe-btn">▶ Subscribe</a>
+    </div>
   </nav>
 </header>
 
@@ -332,9 +586,14 @@
   <!-- HERO -->
   <section class="hero">
     <div>
-      <div class="eyebrow">New drop · Chapter 04</div>
-      <h1>TIME,<br>UNCUT<span class="accent">.</span></h1>
-      <p>Watches built for people who watch closely. Every piece I sell is the same one strapped to my wrist on camera — no filters, no stock photos, just the timepiece.</p>
+      <div class="eyebrow">TIME · DESIGN · PRECISION</div>
+
+<h1 class="hero-title">TRS VISION</h1>
+
+<p class="hero-description">
+  Designed with purpose. Defined by time.
+  Discover a more personal expression of everyday luxury.
+</p>
       <div class="cta-row">
         <a href="#watches" class="btn-primary">Shop the collection</a>
         <a href="#videos" class="btn-ghost">▶ Watch the latest drop</a>
@@ -342,32 +601,187 @@
     </div>
     <div class="hero-visual">
       <div class="ring-glow"></div>
-      <svg class="watch-hero" viewBox="0 0 400 400">
-        <circle cx="200" cy="200" r="150" fill="#131315" stroke="#2a2a2d" stroke-width="10"/>
-        <circle cx="200" cy="200" r="150" fill="none" stroke="#e8283f" stroke-width="3" stroke-dasharray="6 10"/>
-        <circle cx="200" cy="200" r="118" fill="#0d0d0e" stroke="#232326" stroke-width="1.5"/>
-        <g stroke="#5f5f64" stroke-width="2">
-          <line x1="200" y1="90" x2="200" y2="104"/>
-          <line x1="200" y1="296" x2="200" y2="310"/>
-          <line x1="90" y1="200" x2="104" y2="200"/>
-          <line x1="296" y1="200" x2="310" y2="200"/>
+      <svg class="watch-hero" viewBox="0 0 400 400" role="img" aria-label="TRS Vision automatic watch showing the current time">
+        <defs>
+          <linearGradient id="trsd-case" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5a5a60"/><stop offset="0.18" stop-color="#1c1c1f"/>
+            <stop offset="0.5" stop-color="#0b0b0c"/><stop offset="0.82" stop-color="#2b2b2f"/>
+            <stop offset="1" stop-color="#0a0a0b"/>
+          </linearGradient>
+          <linearGradient id="trsd-bezel" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8a8a92"/><stop offset="0.25" stop-color="#2a2a2e"/>
+            <stop offset="0.55" stop-color="#101012"/><stop offset="0.85" stop-color="#3a3a40"/>
+            <stop offset="1" stop-color="#18181a"/>
+          </linearGradient>
+          <radialGradient id="trsd-dial" cx="0.42" cy="0.36" r="0.8">
+            <stop offset="0" stop-color="#1b1b1e"/><stop offset="0.6" stop-color="#0c0c0d"/>
+            <stop offset="1" stop-color="#050506"/>
+          </radialGradient>
+          <linearGradient id="trsd-metal" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8d8d93"/><stop offset="0.45" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#9a9aa0"/>
+          </linearGradient>
+          <linearGradient id="trsd-glare" x1="0.1" y1="0" x2="0.7" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+            <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.02"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="trsd-rimglow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0.82" stop-color="#e8283f" stop-opacity="0"/>
+            <stop offset="0.93" stop-color="#e8283f" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#e8283f" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="trsd-shadow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#000" stop-opacity="0.85"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="trsd-redglow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="trsd-dialclip"><circle cx="200" cy="200" r="136"/></clipPath>
+        </defs>
+
+        <!-- depth: soft red rim light + grounded shadow -->
+        <circle cx="200" cy="200" r="196" fill="url(#trsd-rimglow)" class="trs-dial-rim"/>
+        <ellipse cx="200" cy="378" rx="130" ry="13" fill="url(#trsd-shadow)"/>
+
+        <!-- crown -->
+        <rect x="364" y="187" width="16" height="26" rx="3" fill="#2a1114" stroke="#e8283f" stroke-opacity="0.7" stroke-width="1"/>
+        <g stroke="#e8283f" stroke-opacity="0.55" stroke-width="1">
+          <line x1="368" y1="190" x2="368" y2="210"/><line x1="372" y1="190" x2="372" y2="210"/><line x1="376" y1="190" x2="376" y2="210"/>
         </g>
-        <text x="200" y="150" text-anchor="middle" fill="#8f8f94" font-family="JetBrains Mono" font-size="12" letter-spacing="3">TRS</text>
+
+        <!-- case + bezel -->
+        <circle cx="200" cy="200" r="170" fill="url(#trsd-case)" stroke="#000" stroke-width="2"/>
+        <circle cx="200" cy="200" r="164" fill="url(#trsd-bezel)"/>
+        <circle cx="200" cy="200" r="164" fill="none" stroke="#c9c9d0" stroke-opacity="0.35" stroke-width="1"/>
+        <circle cx="200" cy="200" r="152" fill="#08080a" stroke="#000" stroke-width="3"/>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#4a4a50" stroke-opacity="0.6" stroke-width="1"/>
+
+        <!-- red illumination ring -->
+        <circle cx="200" cy="200" r="143" fill="none" stroke="#e8283f" stroke-width="2" filter="url(#trsd-redglow)" class="trs-dial-ring"/>
+
+        <!-- dial -->
+        <circle cx="200" cy="200" r="138" fill="url(#trsd-dial)"/>
+        <g clip-path="url(#trsd-dialclip)" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="0.6">
+          <circle cx="200" cy="200" r="6"/>
+          <circle cx="200" cy="200" r="9"/>
+          <circle cx="200" cy="200" r="12"/>
+          <circle cx="200" cy="200" r="15"/>
+          <circle cx="200" cy="200" r="18"/>
+          <circle cx="200" cy="200" r="21"/>
+          <circle cx="200" cy="200" r="24"/>
+          <circle cx="200" cy="200" r="27"/>
+          <circle cx="200" cy="200" r="30"/>
+          <circle cx="200" cy="200" r="33"/>
+          <circle cx="200" cy="200" r="36"/>
+          <circle cx="200" cy="200" r="39"/>
+          <circle cx="200" cy="200" r="42"/>
+          <circle cx="200" cy="200" r="45"/>
+          <circle cx="200" cy="200" r="48"/>
+          <circle cx="200" cy="200" r="51"/>
+          <circle cx="200" cy="200" r="54"/>
+          <circle cx="200" cy="200" r="57"/>
+          <circle cx="200" cy="200" r="60"/>
+          <circle cx="200" cy="200" r="63"/>
+          <circle cx="200" cy="200" r="66"/>
+          <circle cx="200" cy="200" r="69"/>
+          <circle cx="200" cy="200" r="72"/>
+          <circle cx="200" cy="200" r="75"/>
+          <circle cx="200" cy="200" r="78"/>
+          <circle cx="200" cy="200" r="81"/>
+          <circle cx="200" cy="200" r="84"/>
+          <circle cx="200" cy="200" r="87"/>
+          <circle cx="200" cy="200" r="90"/>
+          <circle cx="200" cy="200" r="93"/>
+          <circle cx="200" cy="200" r="96"/>
+          <circle cx="200" cy="200" r="99"/>
+          <circle cx="200" cy="200" r="102"/>
+          <circle cx="200" cy="200" r="105"/>
+          <circle cx="200" cy="200" r="108"/>
+          <circle cx="200" cy="200" r="111"/>
+          <circle cx="200" cy="200" r="114"/>
+          <circle cx="200" cy="200" r="117"/>
+          <circle cx="200" cy="200" r="120"/>
+          <circle cx="200" cy="200" r="123"/>
+          <circle cx="200" cy="200" r="126"/>
+          <circle cx="200" cy="200" r="129"/>
+          <circle cx="200" cy="200" r="132"/>
+          <circle cx="200" cy="200" r="135"/>
+        </g>
+        <g clip-path="url(#trsd-dialclip)" stroke="#ffffff" stroke-opacity="0.025" stroke-width="0.5">
+          <circle cx="200" cy="200" r="40" fill="none" stroke-width="24" stroke-dasharray="0.5 0.896" transform="rotate(-90 200 200)"/>
+          <circle cx="200" cy="200" r="72" fill="none" stroke-width="43" stroke-dasharray="0.5 2.013" transform="rotate(-90 200 200)"/>
+          <circle cx="200" cy="200" r="104" fill="none" stroke-width="62" stroke-dasharray="0.5 3.130" transform="rotate(-90 200 200)"/>
+        </g>
+        <circle cx="200" cy="200" r="136" fill="none" stroke="#000" stroke-opacity="0.6" stroke-width="2"/>
+        <circle cx="200" cy="200" r="130.5" fill="none" stroke="#cfcfd4" stroke-opacity="0.75" stroke-width="5" stroke-dasharray="0.9 12.766" transform="rotate(-90.2 200 200)"/>
+        <g fill="#e8283f" filter="url(#trsd-redglow)">
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(0 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(30 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(60 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(90 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(120 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(150 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(180 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(210 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(240 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(270 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(300 200 200)"/>
+          <rect x="197.5" y="57" width="5" height="9" transform="rotate(330 200 200)"/>
+        </g>
+        <g>
+          <g transform="rotate(0 200 200)"><rect x="196.5" y="70" width="7" height="28" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(30 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(60 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(90 200 200)"><rect x="196.5" y="70" width="7" height="28" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(120 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(150 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(180 200 200)"><rect x="196.5" y="70" width="7" height="28" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(210 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(240 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(270 200 200)"><rect x="196.5" y="70" width="7" height="28" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(300 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+          <g transform="rotate(330 200 200)"><rect x="197.25" y="70" width="5.5" height="24" rx="1" fill="url(#trsd-metal)" stroke="#000" stroke-opacity="0.5" stroke-width="0.6"/></g>
+        </g>
+
+        <!-- date window -->
+        <rect x="264" y="188" width="36" height="24" fill="#050506" stroke="#e8283f" stroke-width="1.6"/>
+        <rect x="264" y="188" width="36" height="24" fill="none" stroke="#000" stroke-opacity="0.6" stroke-width="0.6" transform="translate(0.8 0.8)"/>
+        <text id="trs-dial-date" x="282" y="205.5" text-anchor="middle" fill="#f5f3ef" font-family="JetBrains Mono, monospace" font-size="15" font-weight="500">1</text>
+
+        <text x="200" y="146" text-anchor="middle" fill="#e6e6ea" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="4">TRS</text>
+        <text x="200" y="262" text-anchor="middle" fill="#d8d8dc" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.6">TRS VISION</text>
+        <text x="200" y="272" text-anchor="middle" fill="#e8283f" font-family="JetBrains Mono, monospace" font-size="5" letter-spacing="1.8">AUTOMATIC</text>
+
+        <!-- hands (IDs and live-time transforms preserved) -->
         <g id="hour-hand" class="hand-group" transform="translate(200 200)">
-  <line x1="0" y1="0" x2="0" y2="-52"
-        stroke="#f5f3ef" stroke-width="4" stroke-linecap="round"/>
-</g>
+          <polygon points="0,-80 5.5,-64 4.5,14 -4.5,14 -5.5,-64" fill="#000" fill-opacity="0.55" stroke="#000" stroke-opacity="0.45" stroke-width="3"/>
+          <polygon points="0,-80 5.5,-64 4.5,14 -4.5,14 -5.5,-64" fill="url(#trsd-metal)" stroke="#2a2a2e" stroke-width="0.8"/>
+          <polygon points="0,-72 2.2,-62 2,-10 -2,-10 -2.2,-62" fill="#f5f3ef" fill-opacity="0.9"/>
+        </g>
 
-<g id="minute-hand" class="hand-group" transform="translate(200 200)">
-  <line x1="0" y1="0" x2="0" y2="-72"
-        stroke="#f5f3ef" stroke-width="3" stroke-linecap="round"/>
-</g>
+        <g id="minute-hand" class="hand-group" transform="translate(200 200)">
+          <polygon points="0,-122 4,-100 3.2,16 -3.2,16 -4,-100" fill="#000" fill-opacity="0.55" stroke="#000" stroke-opacity="0.45" stroke-width="3"/>
+          <polygon points="0,-122 4,-100 3.2,16 -3.2,16 -4,-100" fill="url(#trsd-metal)" stroke="#2a2a2e" stroke-width="0.8"/>
+          <polygon points="0,-114 1.6,-100 1.4,-10 -1.4,-10 -1.6,-100" fill="#f5f3ef" fill-opacity="0.9"/>
+        </g>
 
-<g id="second-hand" class="hand-group" transform="translate(200 200)">
-  <line x1="0" y1="0" x2="0" y2="-78"
-        stroke="#e8283f" stroke-width="2" stroke-linecap="round"/>
-</g>
-        <circle cx="200" cy="200" r="6" fill="#e8283f"/>
+        <g id="second-hand" class="hand-group" transform="translate(200 200)">
+          <line x1="0" y1="30" x2="0" y2="-130" stroke="#000" stroke-opacity="0.45" stroke-width="3.2" stroke-linecap="round"/>
+          <line x1="0" y1="30" x2="0" y2="-130" stroke="#e8283f" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="0" cy="22" r="4" fill="#e8283f"/>
+          <circle cx="0" cy="22" r="1.6" fill="#050506"/>
+        </g>
+
+        <!-- center cap -->
+        <circle cx="200" cy="200" r="7" fill="#050506" stroke="#e8283f" stroke-width="1.2"/>
+        <circle cx="200" cy="200" r="4" fill="#e8283f"/>
+        <circle cx="200" cy="200" r="1.4" fill="#050506"/>
+
+        <!-- crystal glare -->
+        <path d="M 78 150 A 128 128 0 0 1 250 76 A 150 150 0 0 0 78 150 Z" fill="url(#trsd-glare)"/>
+        <circle cx="200" cy="200" r="138" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
       </svg>
     </div>
   </section>
@@ -401,13 +815,18 @@
     </p>
 
     <div class="price-row">
-      <span class="price">$10.99</span>
+      <span class="price" data-trs-price="blue">৳2,000</span>
 
       <a href="#"
          class="view-link"
          onclick="openWatchDetails('blue'); return false;">
         View Details →
       </a>
+    </div>
+
+    <div class="trs-card-actions">
+      <span class="trs-stock trs-in" data-trs-stock="blue">In stock</span>
+      <button type="button" class="trs-add-btn" data-trs-add="blue">Add to Cart</button>
     </div>
   </div>
 
@@ -427,13 +846,18 @@
     </p>
 
     <div class="price-row">
-      <span class="price">$10.99</span>
+      <span class="price" data-trs-price="black">৳2,000</span>
 
       <a href="#"
          class="view-link"
          onclick="openWatchDetails('black'); return false;">
         View Details →
       </a>
+    </div>
+
+    <div class="trs-card-actions">
+      <span class="trs-stock trs-in" data-trs-stock="black">In stock</span>
+      <button type="button" class="trs-add-btn" data-trs-add="black">Add to Cart</button>
     </div>
   </div>
 
@@ -453,13 +877,18 @@
     </p>
 
     <div class="price-row">
-      <span class="price">$10.99</span>
+      <span class="price" data-trs-price="red">৳2,000</span>
 
       <a href="#"
          class="view-link"
          onclick="openWatchDetails('red'); return false;">
         View Details →
       </a>
+    </div>
+
+    <div class="trs-card-actions">
+      <span class="trs-stock trs-in" data-trs-stock="red">In stock</span>
+      <button type="button" class="trs-add-btn" data-trs-add="red">Add to Cart</button>
     </div>
   </div>
 
@@ -498,7 +927,7 @@
 
       <div id="modal-watch-price"
            class="modal-price">
-        $10.99
+        ৳2,000
       </div>
 
       <p id="modal-watch-description">
@@ -509,7 +938,7 @@
 
         <div>
           <span>PRICE</span>
-          <strong>$10.99</strong>
+          <strong id="modal-watch-price-detail">৳2,000</strong>
         </div>
 
         <div>
@@ -518,19 +947,26 @@
         </div>
 
         <div>
-          <span>ORDER</span>
-          <strong>MESSENGER</strong>
+          <span>DELIVERY</span>
+          <strong id="modal-watch-delivery">৳150</strong>
+        </div>
+
+        <div>
+          <span>AVAILABILITY</span>
+          <strong id="modal-watch-stock" class="trs-in">In stock</strong>
+        </div>
+
+        <div>
+          <span>PAYMENT</span>
+          <strong>bKash</strong>
         </div>
 
       </div>
 
-      <a id="modal-order-button"
-         class="modal-order-button"
-         href="#"
-         target="_blank"
-         rel="noopener noreferrer">
-        ORDER NOW →
-      </a>
+      <div class="trs-modal-actions">
+        <button type="button" id="modal-add-button" class="trs-btn trs-btn-primary">ADD TO CART</button>
+        <button type="button" id="modal-buy-button" class="trs-btn trs-btn-ghost">BUY NOW →</button>
+      </div>
 
     </div>
 
@@ -544,7 +980,7 @@
 .watch-modal {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 99990;
   display: none;
   align-items: center;
   justify-content: center;
@@ -558,24 +994,23 @@
 .watch-modal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.82);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
 }
 
 .watch-modal-box {
   position: relative;
-  z-index: 2;
-  width: min(900px, 100%);
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(100%, 1000px);
   max-height: 90vh;
   overflow-y: auto;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  box-shadow: 0 30px 100px rgba(0,0,0,0.65);
-  animation: watchModalIn 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
+  animation: watchModalIn 0.3s ease both;
 }
 
 @keyframes watchModalIn {
@@ -754,12 +1189,37 @@ body.modal-open {
 
 <script>
 
+/* =====================================================================
+   TRS VISION SHOP SETTINGS  -  the ONLY place you need to edit
+   ===================================================================== */
+const TRS_SHOP_SETTINGS = {
+
+  /* 1) YOUR personal bKash number. Customers send money here.
+        11 digits starting with 01, for example "01XXXXXXXXX".
+        Leave it as "" and checkout stays switched off. */
+  bkashNumber: "01xxxxxxxxx",
+
+  /* 2) Where finished orders are sent: a NEW Formspree form made just for
+        orders (do not reuse the newsletter one). Looks like
+        "https://formspree.io/f/xxxxxxxx". Leave "" and checkout stays off. */
+  orderEndpoint: "01xxxxxxxxxx",
+
+  deliveryCharge: 150,      /* taka, added once to every order */
+  maxQtyPerItem: 5,         /* most of one watch in a single order */
+  currencySymbol: "৳"       /* change to "Tk " if the symbol looks odd on a phone */
+};
+
+/* =====================================================================
+   WATCHES  -  price is in taka.
+   inStock: true  = can be ordered      inStock: false = shows "Out of stock"
+   ===================================================================== */
 const watchProducts = {
 
   blue: {
     name: "TRS Vision Blue",
     image: "./blue-watch.png.png",
-    price: "$10.99",
+    price: 2000,
+    inStock: true,
     description:
       "Premium blue dial with black metal case and genuine leather strap. Perfect for everyday luxury."
   },
@@ -767,7 +1227,8 @@ const watchProducts = {
   black: {
     name: "TRS Vision Black",
     image: "./black-watch.png.png",
-    price: "$10.99",
+    price: 2000,
+    inStock: false,
     description:
       "Minimal all-black design with premium craftsmanship. Modern, elegant and timeless."
   },
@@ -775,12 +1236,19 @@ const watchProducts = {
   red: {
     name: "TRS Vision Red",
     image: "./red-watch.png.png",
-    price: "$10.99",
+    price: 2000,
+    inStock: false,
     description:
       "Bold red dial with black case. Designed to stand out while keeping a premium appearance."
   }
 
 };
+
+
+/* Turns 2000 into "৳2,000" */
+function trsFormatMoney(amount) {
+  return TRS_SHOP_SETTINGS.currencySymbol + Number(amount).toLocaleString("en-US");
+}
 
 
 function openWatchDetails(productKey) {
@@ -799,28 +1267,36 @@ function openWatchDetails(productKey) {
     product.name;
 
   document.getElementById("modal-watch-price").textContent =
-    product.price;
+    trsFormatMoney(product.price);
+
+  document.getElementById("modal-watch-price-detail").textContent =
+    trsFormatMoney(product.price);
+
+  document.getElementById("modal-watch-delivery").textContent =
+    trsFormatMoney(TRS_SHOP_SETTINGS.deliveryCharge);
 
   document.getElementById("modal-watch-description").textContent =
     product.description;
 
 
   /*
-    Messenger order link.
-
-    The message is encoded so the customer's
-    selected watch is automatically included.
+    Stock status + cart buttons.
+    The buttons are wired up in the CART & CHECKOUT block
+    near the bottom of this file.
   */
 
-  const message =
-    `Hi! I'd like to order the ${product.name} for ${product.price}.`;
+  const stockEl = document.getElementById("modal-watch-stock");
+  stockEl.textContent = product.inStock ? "In stock" : "Out of stock";
+  stockEl.className = product.inStock ? "trs-in" : "trs-out";
 
-  const messengerURL =
-    `https://m.me/61593762874547?ref=${encodeURIComponent(message)}`;
+  const addBtn = document.getElementById("modal-add-button");
+  addBtn.disabled = !product.inStock;
+  addBtn.textContent = product.inStock ? "ADD TO CART" : "OUT OF STOCK";
 
-  document.getElementById("modal-order-button").href =
-    messengerURL;
+  document.getElementById("modal-buy-button").hidden = !product.inStock;
 
+
+  document.getElementById("watch-modal").dataset.product = productKey;
 
   document.getElementById("watch-modal")
     .classList.add("active");
@@ -941,53 +1417,141 @@ document.querySelector(".watch-modal-box")
 
   <!-- NEWSLETTER + FOOTER -->
   <footer id="join">
-    <div class="newsletter reveal">
-      <div class="section-tag">Stay in the loop</div>
-      <h2>Get first access to every drop.</h2>
-      <p>Restocks sell out fast. Join the list and get notified before they hit the site.</p>
-      <form class="form-row" onsubmit="return false;">
-        <input type="email" placeholder="your@email.com" required aria-label="Email address">
-        <button class="btn-primary" type="submit">Notify me</button>
-      </form>
+
+<!-- ABOUT THE OWNER -->
+<section class="owner-section" id="about-owner">
+  <div class="owner-inner">
+
+    <div class="owner-heading">
+      <span class="owner-eyebrow">BEHIND THE VISION</span>
+      <h2>MEET SAMMAM<span>.</span></h2>
+      <p class="owner-subtitle">
+        Just a guy with big dreams and too many ideas.
+      </p>
     </div>
+
+    <div class="owner-content">
+
+      <div class="owner-photo-wrap">
+        <img
+          class="owner-photo"
+          src="sammam.jpg"
+          alt="Sammam, the creator behind TRS VISION"
+          loading="lazy"
+        >
+        <span class="owner-photo-label">THE GUY BEHIND THE BRAND</span>
+      </div>
+
+      <div class="owner-story">
+        <span class="owner-tag">A LITTLE ABOUT ME</span>
+
+        <h3>So... who's behind TRS VISION?</h3>
+
+        <p>
+          Hey! I'm <strong>Sammam</strong>. I'm a young creator
+          with big ambitions, a creative mind, and approximately
+          47 ideas before breakfast. 😂
+        </p>
+
+        <p>
+          I love gaming, creative projects, cool designs, and
+          turning random ideas into real things. One day I'm
+          working on a website; the next, I'm tweaking a watch
+          design or trying to make an animation look ridiculously cool.
+        </p>
+
+        <p>
+          TRS VISION is my way of building something of my own.
+          I'm learning as I go, making mistakes, fixing them,
+          and occasionally asking my code why it has chosen violence. 💀
+        </p>
+
+        <p>
+          I'm not pretending to have everything figured out.
+          I'm just starting, dreaming big, and putting in the work.
+        </p>
+
+        <div class="owner-mission">
+          <span>THE MISSION?</span>
+          <p>
+            Build something I'm proud of. Keep improving.
+            Make the vision real.
+          </p>
+        </div>
+
+        <p class="owner-signoff">
+          Driven by ambition. Powered by creativity.
+          Built for gamers.
+        </p>
+
+        <p class="owner-joke">
+          And yes, I probably have another idea already. 😂
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END ABOUT THE OWNER -->
+
+
+ <div class="newsletter reveal">
+  <div class="section-tag">STAY IN THE LOOP</div>
+  <h2>BE THE FIRST TO KNOW.</h2>
+  <p>New drops, fresh designs, and exclusive updates from TRS VISION. Straight to your inbox.</p>
+
+  
+<form
+  action="https://formspree.io/f/moeejvgr"
+  method="POST"
+  class="form-row"
+  id="newsletter-form"
+>
+  <input
+    type="email"
+    id="newsletter-email"
+    name="email"
+    placeholder="Enter your email address"
+    autocomplete="email"
+    aria-label="Email address"
+    required
+  >
+
+  <input
+    type="hidden"
+    name="_subject"
+    value="New TRS VISION Newsletter Subscriber"
+  >
+
+  <button class="btn-primary" type="submit">
+    Notify me ↗
+  </button>
+</form>
+
+
+  <p id="newsletter-message" class="newsletter-message" aria-live="polite">
+    Join the list. Stay ahead of the next drop.
+  </p>
+</div>
 
     <div class="footer-bottom">
       <div class="footer-col footer-brand">
         <div class="logo"><span class="dot"></span>TRS VISION</div>
-        <p>Watches worn on camera before they're ever sold. Based on the channel, built for the people who watch it.</p>
+        <p>Got a question or just want to talk? The owner is on Instagram. Drop a message anytime.</p>
       <div class="socials">
-  <!-- YouTube -->
-  <a href="https://www.youtube.com/@sammam-q8h"
-     class="social-ic"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="TRS VISION YouTube">
-    ▶
-  </a>
-
-  <!-- Instagram -->
-  <a href="https://www.instagram.com/trs_vision/"
-     class="social-ic"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="TRS VISION Instagram">
-    ◎
-  </a>
-
-  <!-- TikTok -->
-  <a href="https://www.tiktok.com/sammam"
-     class="social-ic"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="TRS VISION TikTok">
-    ♪
-  </a>
-</div>  
+</div class="socials">
+      <a href="https://www.instagram.com/sammam_2012/"
+         class="social-ic"
+         aria-label="Contact TRS VISION on Instagram"
+         target="_blank"
+         rel="noopener noreferrer"
+         title="Message us on Instagram">◎</a>
+      
     </div>
 
     <div class="legal">
       <span>© 2026 TRS VISION. All rights reserved.</span>
-      <span>Built for people who watch closely.</span>
+      <span>Built for people who WATCH closely.</span>
     </div>
   </footer>
 
@@ -1267,6 +1831,2435 @@ secondHand.setAttribute('transform', `translate(200 200) rotate(${secondAngle})`
   }, {threshold:0.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
+<script>
+/* TRS VISION hero watch: date window */
+(function(){
+  var el=document.getElementById('trs-dial-date');
+  if(!el) return;
+  function setDate(){
+    el.textContent=new Date().getDate();
+    var n=new Date();
+    var next=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,0,0,1);
+    setTimeout(setDate,Math.max(1000,next-n));
+  }
+  setDate();
+})();
+</script>
+<!-- ===== TRS VISION MIDNIGHT FIREWORKS (VIVID) — START ===== -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- Settings ---------------- */
+  const trsFwConfig = {
+    colorful: true,                       // true = full colour palettes, false = white / silver / red only
+    allowTestMode: true,                  // set to false before publishing to switch the test preview off
+    showTestButton: true,                 // shows the "Preview fireworks" button (only while allowTestMode is true)
+    testParam: 'trs-fireworks-test',      // open index.html?trs-fireworks-test to preview
+    storageKey: 'trs-fireworks-last-played',
+    leadMs: 4200,                         // rockets start this long before midnight
+    graceMs: 600,                         // tolerated timer lateness after midnight
+    zIndex: 10000,
+    maxParticles: 1600
+  };
+
+  const trsFwColors = {
+    white:   [255, 255, 255],
+    silver:  [190, 200, 218],
+    red:     [255, 50, 70],
+    orange:  [255, 140, 40],
+    gold:    [255, 205, 80],
+    green:   [70, 255, 150],
+    cyan:    [60, 225, 255],
+    blue:    [70, 130, 255],
+    violet:  [170, 100, 255],
+    magenta: [255, 60, 200],
+    pink:    [255, 120, 170]
+  };
+
+  const trsFwPalettesVivid = [
+    ['gold', 'orange', 'white'],
+    ['cyan', 'blue', 'white'],
+    ['magenta', 'violet', 'white'],
+    ['red', 'orange', 'gold'],
+    ['green', 'cyan', 'white'],
+    ['pink', 'gold', 'white'],
+    ['blue', 'violet', 'magenta'],
+    ['white', 'silver', 'red']
+  ];
+  const trsFwPalettesClassic = [['white', 'silver', 'red']];
+
+  const trsFwState = {
+    timer: 0, testTimer: 0, target: 0, destroyed: false, playedMemory: '',
+    running: false, raf: 0, canvas: null, ctx: null, sprites: null,
+    W: 0, H: 0, dpr: 1, small: false,
+    zero: 0, last: 0, ema: 16, frames: 0, quality: 1,
+    rockets: [], particles: [], waves: [], flashes: [], wash: null
+  };
+
+  /* ---------------- Helpers ---------------- */
+  function trsFwRand(a, b) { return a + Math.random() * (b - a); }
+  function trsFwAlpha(a) { return Math.max(0, Math.min(1, a)).toFixed(3); }
+  function trsFwRgb(name) { return trsFwColors[name].join(','); }
+  function trsFwTint(name) {                                        // the colour, pushed toward white
+    return trsFwColors[name].map(function (v) { return Math.round(v + (255 - v) * 0.5); }).join(',');
+  }
+  function trsFwShuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function trsFwNextMidnight(fromMs) {
+    const d = new Date(fromMs);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 0, 0, 0, 0).getTime();
+  }
+
+  function trsFwDayKey(ms) {
+    const d = new Date(ms);
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+
+  function trsFwHasPlayed(key) {
+    if (trsFwState.playedMemory === key) return true;
+    try { return window.sessionStorage.getItem(trsFwConfig.storageKey) === key; } catch (e) { return false; }
+  }
+
+  function trsFwMarkPlayed(key) {
+    trsFwState.playedMemory = key;
+    try { window.sessionStorage.setItem(trsFwConfig.storageKey, key); } catch (e) { /* storage blocked: memory copy is enough */ }
+  }
+
+  function trsFwReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function trsFwBuildSprites() {
+    if (trsFwState.sprites) return;
+    const out = {};
+    Object.keys(trsFwColors).forEach(function (name) {
+      const c = trsFwRgb(name);
+      const cv = document.createElement('canvas');
+      cv.width = cv.height = 64;
+      const g = cv.getContext('2d');
+      const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.12, 'rgba(' + c + ',0.95)');
+      grad.addColorStop(0.35, 'rgba(' + c + ',0.3)');
+      grad.addColorStop(1, 'rgba(' + c + ',0)');
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 64, 64);
+      out[name] = cv;
+    });
+    trsFwState.sprites = out;
+  }
+
+  function trsFwResize() {
+    const s = trsFwState;
+    if (!s.canvas) return;
+    s.W = window.innerWidth;
+    s.H = window.innerHeight;
+    s.small = s.W < 640;
+    s.dpr = Math.min(window.devicePixelRatio || 1, s.small ? 1.5 : 2);
+    s.canvas.width = Math.round(s.W * s.dpr);
+    s.canvas.height = Math.round(s.H * s.dpr);
+    s.ctx.setTransform(s.dpr, 0, 0, s.dpr, 0, 0);
+  }
+
+  /* ---------------- Rockets ---------------- */
+  function trsFwBuildRockets() {
+    const small = trsFwState.small;
+    const pals = trsFwShuffle((trsFwConfig.colorful ? trsFwPalettesVivid : trsFwPalettesClassic).slice());
+    const list = [];
+
+    function make(o) {
+      const pal = pals[list.length % pals.length];
+      list.push({
+        startX: o.startX, drift: o.drift, burstY: o.burstY,
+        flight: o.flight, burstAt: o.burstAt, launchAt: o.burstAt - o.flight,
+        type: o.type, hero: !!o.hero, scale: o.scale || 1,
+        palette: pal, trail: trsFwTint(pal[0]),
+        sway: trsFwRand(4, 9), swayFreq: trsFwRand(1.2, 2.2), swayPhase: trsFwRand(0, 6.28),
+        burst: false
+      });
+    }
+
+    // Main salvo: lands on midnight, centre first, then outward
+    const n = small ? 5 : 7;
+    const sequence = n === 7 ? [3, 2, 4, 1, 5, 0, 6] : [2, 1, 3, 0, 4];
+    const types = ['peony', 'double', 'ring', 'willow', 'crossette', 'peony', 'ring'];
+    const offsets = [0, 110, 230, 360, 500, 650, 820];              // ms after midnight
+    for (let k = 0; k < n; k++) {
+      make({
+        startX: (sequence[k] + 0.5) / n + trsFwRand(-0.04, 0.04),
+        drift: trsFwRand(-0.05, 0.05),
+        burstY: k === 0 ? 0.2 : trsFwRand(0.15, 0.36),
+        flight: trsFwRand(2600, 3800),
+        burstAt: k === 0 ? 0 : offsets[k] + trsFwRand(-25, 25),
+        type: types[k], hero: k === 0
+      });
+    }
+
+    // Finale: short, fast rockets that keep the sky busy for a couple of seconds
+    const fn = small ? 3 : 5;
+    const ftypes = ['peony', 'crossette', 'willow', 'double', 'ring'];
+    for (let i = 0; i < fn; i++) {
+      make({
+        startX: trsFwRand(0.1, 0.9), drift: trsFwRand(-0.04, 0.04), burstY: trsFwRand(0.15, 0.42),
+        flight: trsFwRand(1000, 1500), burstAt: 1250 + i * 340 + trsFwRand(-70, 70),
+        type: ftypes[i % ftypes.length], scale: 0.72
+      });
+    }
+    return list;
+  }
+
+  // Pure function of time: where is this rocket at tRel (ms relative to midnight)?
+  function trsFwRocketPos(r, tRel) {
+    const s = trsFwState;
+    const p = Math.max(0, Math.min(1, (tRel - r.launchAt) / r.flight));
+    const e = 1 - Math.pow(1 - p, 1.5);
+    const y0 = s.H + 12;
+    const y1 = r.burstY * s.H;
+    return {
+      x: s.W * (r.startX + r.drift * e) + Math.sin(e * Math.PI * r.swayFreq + r.swayPhase) * r.sway,
+      y: y0 + (y1 - y0) * e
+    };
+  }
+
+  function trsFwDrawRocket(ctx, r, tRel) {
+    const N = 16, STEP = 32;
+    const sp = trsFwState.sprites;
+    let prev = trsFwRocketPos(r, tRel);
+    const head = prev;
+    ctx.lineCap = 'round';
+    for (let k = 1; k <= N; k++) {
+      const t = tRel - k * STEP;
+      if (t < r.launchAt) break;
+      const pt = trsFwRocketPos(r, t);
+      const f = 1 - k / (N + 1);
+      const a = Math.pow(f, 1.5);
+      ctx.beginPath();
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(pt.x, pt.y);
+      ctx.strokeStyle = 'rgba(' + trsFwRgb(r.palette[0]) + ',' + trsFwAlpha(a * 0.22) + ')';
+      ctx.lineWidth = (0.8 + 2.6 * f) * 3.2;
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(' + r.trail + ',' + trsFwAlpha(a * 0.95) + ')';
+      ctx.lineWidth = 0.6 + 2.0 * f;
+      ctx.stroke();
+      prev = pt;
+    }
+    ctx.globalAlpha = 0.8;
+    ctx.drawImage(sp[r.palette[0]], head.x - 16, head.y - 16, 32, 32);
+    ctx.globalAlpha = 1;
+    ctx.drawImage(sp.white, head.x - 9, head.y - 9, 18, 18);
+  }
+
+  /* ---------------- Bursts ---------------- */
+  function trsFwBurst(r) {
+    const s = trsFwState;
+    const pos = trsFwRocketPos(r, r.burstAt);
+    const x = pos.x, y = pos.y;
+    const q = s.quality * (s.small ? 0.65 : 1) * r.scale;
+    const R = (s.small ? s.W * 0.36 : Math.min(s.W, s.H) * 0.30) * trsFwRand(0.88, 1.15) * (r.hero ? 1.15 : 1) * r.scale;
+    const K = 2.2;                                                  // air drag (1/s)
+    const G = R * 0.4;                                              // gravity (px/s^2)
+    const pal = r.palette;
+    const list = s.particles;
+
+    function add(vx, vy, color, o) {
+      if (list.length >= trsFwConfig.maxParticles) return;
+      list.push({
+        x: x, y: y, vx: vx, vy: vy,
+        k: o.k || K,
+        g: o.g === undefined ? G : o.g,
+        age: 0,
+        life: o.life || trsFwRand(1.7, 2.5),
+        size: o.size || trsFwRand(1.5, 2.8),
+        color: color,
+        glitter: o.glitter === undefined ? Math.random() < 0.4 : o.glitter,
+        pop: !!o.pop,
+        maxA: 1
+      });
+    }
+    function pick() {
+      const v = Math.random();
+      return v < 0.45 ? pal[0] : (v < 0.8 ? pal[1] : pal[2]);
+    }
+    function sphere(count, minS, maxS, colorFn, o) {
+      for (let i = 0; i < count; i++) {
+        const a = (i / count) * Math.PI * 2 + trsFwRand(-0.05, 0.05);
+        const sp = R * (o.k || K) * trsFwRand(minS, maxS);
+        add(Math.cos(a) * sp, Math.sin(a) * sp, colorFn(), o);
+      }
+    }
+
+    if (r.type === 'peony') {
+      const n = Math.round(170 * q);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + trsFwRand(-0.05, 0.05);
+        const sp = R * K * (Math.random() < 0.7 ? trsFwRand(0.9, 1.0) : trsFwRand(0.35, 0.85));
+        add(Math.cos(a) * sp, Math.sin(a) * sp, pick(), {});
+      }
+    } else if (r.type === 'double') {
+      sphere(Math.round(120 * q), 0.85, 1.0, function () { return Math.random() < 0.7 ? pal[0] : pal[2]; }, {});
+      sphere(Math.round(80 * q), 0.4, 0.6, function () { return pal[1]; }, { size: trsFwRand(1.8, 3.0), life: trsFwRand(1.4, 2.0) });
+    } else if (r.type === 'ring') {
+      const rot = trsFwRand(0, Math.PI);
+      const squash = trsFwRand(0.35, 0.85);
+      const n = Math.round(110 * q);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2;
+        const sp = R * K * trsFwRand(0.98, 1.02);
+        const vx0 = Math.cos(a) * sp, vy0 = Math.sin(a) * sp * squash;
+        add(vx0 * Math.cos(rot) - vy0 * Math.sin(rot), vx0 * Math.sin(rot) + vy0 * Math.cos(rot),
+          i % 2 ? pal[0] : pal[1], { g: G * 0.4, life: trsFwRand(1.9, 2.5), size: trsFwRand(2.0, 3.0), glitter: false });
+      }
+      sphere(Math.round(55 * q), 0.2, 0.55, function () { return Math.random() < 0.5 ? pal[2] : pal[0]; }, {});
+    } else if (r.type === 'crossette') {                            // sparks that split into little pops
+      const n = Math.round(95 * q);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + trsFwRand(-0.06, 0.06);
+        const sp = R * K * trsFwRand(0.6, 1.0);
+        const pop = Math.random() < 0.45;
+        add(Math.cos(a) * sp, Math.sin(a) * sp, pick(), pop ? { pop: true, life: trsFwRand(1.0, 1.4) } : {});
+      }
+    } else {                                                        // willow: long, weeping sparks
+      const n = Math.round(120 * q);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + trsFwRand(-0.08, 0.08);
+        const sp = R * 1.5 * trsFwRand(0.55, 1.0);
+        add(Math.cos(a) * sp, Math.sin(a) * sp, Math.random() < 0.65 ? pal[0] : pal[1],
+          { k: 1.5, g: R * 0.75, life: trsFwRand(2.8, 3.6), size: trsFwRand(1.3, 2.2), glitter: Math.random() < 0.65 });
+      }
+    }
+
+    const ringColor = trsFwTint(pal[0]);
+    s.waves.push({ x: x, y: y, R: R * (r.type === 'ring' ? 1.1 : 0.85), age: 0, dur: 0.9, color: ringColor });
+    s.waves.push({ x: x, y: y, R: R * 1.25, age: -0.1, dur: 1.0, color: ringColor });
+    s.flashes.push({ x: x, y: y, r: R * 2.4, age: 0, dur: r.hero ? 0.6 : 0.4, a: r.hero ? 0.8 : 0.4, c: trsFwRgb(pal[0]) });
+    if (r.hero) s.wash = { age: 0, dur: 0.8, a: 0.16 };             // brief cinematic flash across the screen
+    r.burst = true;
+  }
+
+  function trsFwPop(p) {
+    const s = trsFwState;
+    for (let i = 0; i < 6; i++) {
+      if (s.particles.length >= trsFwConfig.maxParticles) return;
+      const a = trsFwRand(0, Math.PI * 2), sp = trsFwRand(70, 170);
+      s.particles.push({ x: p.x, y: p.y, vx: p.vx * 0.3 + Math.cos(a) * sp, vy: p.vy * 0.3 + Math.sin(a) * sp,
+        k: 2.4, g: 20, age: 0, life: trsFwRand(0.5, 0.9), size: trsFwRand(1.2, 1.9), color: p.color, glitter: true, pop: false, maxA: 1 });
+    }
+  }
+
+  /* ---------------- Simulation + drawing ---------------- */
+  function trsFwUpdate(dt) {
+    const s = trsFwState;
+    const P = s.particles;
+    for (let i = P.length - 1; i >= 0; i--) {
+      const p = P[i];
+      p.age += dt;
+      if (p.age >= p.life) {
+        P[i] = P[P.length - 1];
+        P.pop();
+        if (p.pop) trsFwPop(p);
+        continue;
+      }
+      const damp = Math.exp(-p.k * dt);
+      p.vx *= damp;
+      p.vy = p.vy * damp + p.g * dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+    }
+    [s.waves, s.flashes].forEach(function (arr) {
+      for (let i = arr.length - 1; i >= 0; i--) {
+        arr[i].age += dt;
+        if (arr[i].age >= arr[i].dur) arr.splice(i, 1);
+      }
+    });
+    if (s.wash) {
+      s.wash.age += dt;
+      if (s.wash.age >= s.wash.dur) s.wash = null;
+    }
+  }
+
+  function trsFwDrawScene(ctx, tRel) {
+    const s = trsFwState;
+    ctx.clearRect(0, 0, s.W, s.H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    if (s.wash) {
+      const p = s.wash.age / s.wash.dur;
+      ctx.fillStyle = 'rgba(255,255,255,' + trsFwAlpha(s.wash.a * Math.pow(1 - p, 2)) + ')';
+      ctx.fillRect(0, 0, s.W, s.H);
+    }
+    s.flashes.forEach(function (f) {
+      const a = f.a * Math.pow(1 - f.age / f.dur, 2);
+      const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
+      g.addColorStop(0, 'rgba(255,255,255,' + trsFwAlpha(a) + ')');
+      g.addColorStop(0.3, 'rgba(' + f.c + ',' + trsFwAlpha(a * 0.5) + ')');
+      g.addColorStop(1, 'rgba(' + f.c + ',0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(f.x - f.r, f.y - f.r, f.r * 2, f.r * 2);
+    });
+
+    s.rockets.forEach(function (r) {
+      if (!r.burst && tRel >= r.launchAt) trsFwDrawRocket(ctx, r, tRel);
+    });
+
+    const sp = s.sprites;
+    s.particles.forEach(function (p) {
+      const f = p.age / p.life;
+      let a = Math.pow(1 - f, 1.3) * p.maxA;
+      if (p.glitter && f > 0.4 && Math.random() < 0.35) a *= 0.12;
+      if (a < 0.02) return;
+      const d = p.size * 7.5 * (0.6 + 0.4 * (1 - f));
+      const img = sp[p.color];
+      const tx = p.vx * 0.024, ty = p.vy * 0.024;
+      ctx.globalAlpha = a;
+      ctx.drawImage(img, p.x - d / 2, p.y - d / 2, d, d);
+      ctx.globalAlpha = a * 0.45;
+      ctx.drawImage(img, p.x - tx - d * 0.35, p.y - ty - d * 0.35, d * 0.7, d * 0.7);
+      ctx.globalAlpha = a * 0.22;
+      ctx.drawImage(img, p.x - tx * 2.2 - d * 0.25, p.y - ty * 2.2 - d * 0.25, d * 0.5, d * 0.5);
+    });
+    ctx.globalAlpha = 1;
+
+    s.waves.forEach(function (w) {
+      const p = w.age / w.dur;
+      if (p < 0) return;
+      const rr = w.R * (1 - Math.pow(1 - p, 3));
+      if (rr < 0.5) return;
+      const a = Math.pow(1 - p, 2) * 0.6;
+      ctx.beginPath();
+      ctx.arc(w.x, w.y, rr, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + w.color + ',' + trsFwAlpha(a * 0.25) + ')';
+      ctx.lineWidth = 8 * (1 - p) + 1;
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(' + w.color + ',' + trsFwAlpha(a) + ')';
+      ctx.lineWidth = 1.8 * (1 - p) + 0.4;
+      ctx.stroke();
+    });
+
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function trsFwFrame(now) {
+    const s = trsFwState;
+    if (!s.running) return;
+    s.raf = window.requestAnimationFrame(trsFwFrame);
+
+    const rawMs = Math.min(100, Math.max(0, now - s.last));
+    s.last = now;
+    const dt = Math.min(rawMs, 50) / 1000;
+    s.ema = s.ema * 0.92 + rawMs * 0.08;                            // if frames are slow, later bursts get lighter
+    s.frames++;
+    if (s.frames > 40 && s.ema > 32) s.quality = 0.6;
+
+    const tRel = now - s.zero;                                      // ms relative to midnight (negative = before)
+
+    s.rockets.forEach(function (r) {
+      if (r.burst) return;
+      if (tRel >= r.burstAt) { trsFwBurst(r); return; }
+      if (tRel >= r.launchAt && s.particles.length < trsFwConfig.maxParticles && Math.random() < dt * 45) {
+        const pos = trsFwRocketPos(r, tRel);                        // sparks shed from the rocket
+        s.particles.push({ x: pos.x + trsFwRand(-1, 1), y: pos.y + 3, vx: trsFwRand(-18, 18), vy: trsFwRand(8, 55),
+          k: 1.6, g: 40, age: 0, life: trsFwRand(0.45, 0.9), size: trsFwRand(0.9, 1.5),
+          color: Math.random() < 0.3 ? 'white' : r.palette[0], glitter: false, pop: false, maxA: 0.7 });
+      }
+    });
+
+    trsFwUpdate(dt);
+    trsFwDrawScene(s.ctx, tRel);
+
+    const idle = s.rockets.every(function (r) { return r.burst; }) &&
+      !s.particles.length && !s.waves.length && !s.flashes.length && !s.wash;
+    if (idle || tRel > 12000) trsFwStop(true);
+  }
+
+  /* ---------------- Start / stop ---------------- */
+  function trsFwStartShow(targetMs, isTest) {
+    const s = trsFwState;
+    if (s.running || s.destroyed) return false;
+    if (trsFwReducedMotion()) {
+      if (isTest && window.console) console.info('[trs-fireworks] Skipped: reduced motion is turned on in your system settings.');
+      return false;
+    }
+    if (document.hidden) return false;
+
+    const cv = document.createElement('canvas');
+    const ctx = cv.getContext('2d');
+    if (!ctx) return false;
+    cv.id = 'trs-fireworks-canvas';
+    cv.setAttribute('aria-hidden', 'true');
+    cv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:' +
+      trsFwConfig.zIndex + ';display:block;';
+    document.body.appendChild(cv);
+
+    s.canvas = cv;
+    s.ctx = ctx;
+    trsFwBuildSprites();
+    trsFwResize();
+    window.addEventListener('resize', trsFwResize);
+
+    s.rockets = trsFwBuildRockets();
+    s.particles = []; s.waves = []; s.flashes = []; s.wash = null;
+    s.quality = 1; s.ema = 16; s.frames = 0;
+    s.last = window.performance.now();
+    s.zero = s.last + (targetMs - Date.now());                      // midnight expressed on the animation clock
+    s.running = true;
+    s.raf = window.requestAnimationFrame(trsFwFrame);
+    return true;
+  }
+
+  function trsFwStop(reschedule) {
+    const s = trsFwState;
+    if (s.raf) window.cancelAnimationFrame(s.raf);
+    s.raf = 0;
+    window.removeEventListener('resize', trsFwResize);
+    if (s.canvas && s.canvas.parentNode) s.canvas.parentNode.removeChild(s.canvas);
+    s.canvas = null; s.ctx = null;
+    s.rockets = []; s.particles = []; s.waves = []; s.flashes = []; s.wash = null;
+    s.running = false;
+    if (reschedule && !s.destroyed) trsFwTick();
+  }
+
+  /* ---------------- Midnight scheduler ---------------- */
+  function trsFwTick() {
+    const s = trsFwState;
+    window.clearTimeout(s.timer);
+    s.timer = 0;
+    if (s.running || s.destroyed) return;
+
+    const now = Date.now();
+    if (!s.target || now > s.target + trsFwConfig.graceMs) s.target = trsFwNextMidnight(now);   // day rolled over / device slept
+
+    const untilLaunch = s.target - trsFwConfig.leadMs - now;
+    if (untilLaunch > 0) {
+      s.timer = window.setTimeout(trsFwTick, Math.min(untilLaunch, 30000));   // re-check the real clock at least every 30 s
+      return;
+    }
+
+    // Inside the launch window (from leadMs before midnight up to graceMs after it)
+    const key = trsFwDayKey(s.target);
+    if (!trsFwHasPlayed(key) && trsFwStartShow(s.target, false)) {
+      trsFwMarkPlayed(key);
+      return;
+    }
+    s.timer = window.setTimeout(trsFwTick, 1000);                   // already played / hidden tab / reduced motion: wait out the window
+  }
+
+  function trsFwOnVisibility() {
+    if (document.hidden) { if (trsFwState.running) trsFwStop(true); }
+    else trsFwTick();
+  }
+
+  function trsFwOnPageShow(e) { if (e.persisted) trsFwTick(); }
+
+  function trsFwOnPageHide(e) {
+    const s = trsFwState;
+    window.clearTimeout(s.timer);
+    window.clearTimeout(s.testTimer);
+    s.timer = 0; s.testTimer = 0;
+    if (s.running) trsFwStop(false);
+    if (!e.persisted) {                                             // page is really going away: drop every listener
+      s.destroyed = true;
+      document.removeEventListener('visibilitychange', trsFwOnVisibility);
+      window.removeEventListener('pagehide', trsFwOnPageHide);
+      window.removeEventListener('pageshow', trsFwOnPageShow);
+    }
+  }
+
+  /* ---------------- Test preview ---------------- */
+  function trsFwTestRequested() {
+    if (!trsFwConfig.allowTestMode) return false;
+    try { return new URLSearchParams(window.location.search).has(trsFwConfig.testParam); } catch (e) { return false; }
+  }
+
+  function trsFwRunTest() {
+    // Pretends "midnight" is leadMs + 0.7 s from now. Does not touch the real schedule or the once-per-day record.
+    trsFwStartShow(Date.now() + trsFwConfig.leadMs + 700, true);
+  }
+
+  function trsFwAddTestButton() {
+    if (!trsFwConfig.allowTestMode || !trsFwConfig.showTestButton) return;
+    if (document.getElementById('trs-fireworks-test-btn')) return;
+    const b = document.createElement('button');
+    b.id = 'trs-fireworks-test-btn';
+    b.type = 'button';
+    b.textContent = '✦ Preview fireworks';
+    b.style.cssText = 'position:fixed;left:24px;bottom:24px;z-index:9000;padding:11px 18px;' +
+      'background:#131315;color:#f5f3ef;border:1px solid rgba(245,243,239,0.18);border-radius:3px;' +
+      'font:600 12px Inter,sans-serif;letter-spacing:0.5px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.5);';
+    b.addEventListener('click', trsFwRunTest);
+    document.body.appendChild(b);
+  }
+
+  function trsFwInit() {
+    document.addEventListener('visibilitychange', trsFwOnVisibility);
+    window.addEventListener('pagehide', trsFwOnPageHide);
+    window.addEventListener('pageshow', trsFwOnPageShow);
+    trsFwTick();
+    if (trsFwConfig.allowTestMode) window.trsFireworksPreview = trsFwRunTest;   // lets any button call trsFireworksPreview()
+    trsFwAddTestButton();
+    if (trsFwTestRequested()) trsFwState.testTimer = window.setTimeout(trsFwRunTest, 600);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', trsFwInit, { once: true });
+  else trsFwInit();
+})();
+</script>
+<!-- ===== TRS VISION MIDNIGHT FIREWORKS (VIVID) — END ===== -->
+ 
+<script>
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterMessage = document.getElementById('newsletter-message');
+
+  if (newsletterForm && newsletterMessage) {
+    };
+  
+</script>
+
+<!-- ===== TRS VISION CART & CHECKOUT — START ===== -->
+<!-- Everything below is prefixed "trs-" so it cannot clash with the rest of the site.
+     Settings (bKash number, order inbox, prices, stock) live in TRS_SHOP_SETTINGS / watchProducts
+     in the watch-shop code higher up the page. -->
+
+<style>
+/* ---------- Nav cart button ---------- */
+.trs-nav-actions{display:flex; align-items:center; gap:12px;}
+.trs-cart-btn{
+  position:relative; width:44px; height:44px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--line); color:var(--text);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  transition:border-color 0.2s, color 0.2s;
+}
+.trs-cart-btn:hover{border-color:var(--red-bright); color:var(--red-bright);}
+.trs-cart-btn svg{width:20px; height:20px;}
+.trs-cart-count{
+  position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 5px;
+  border-radius:10px; background:var(--red); color:#fff; text-align:center;
+  font:700 11px/20px var(--mono);
+}
+@media (max-width:480px){
+  header nav{padding:14px 16px;}
+  .trs-nav-actions{gap:8px;}
+  .trs-nav-actions .subscribe-btn{padding:10px 12px; font-size:12px;}
+}
+
+/* ---------- Watch card: stock badge + Add to Cart ---------- */
+.trs-card-actions{
+  display:flex; align-items:center; gap:12px;
+  margin-top:18px; padding-top:18px; border-top:1px solid var(--line);
+}
+.trs-stock{
+  display:flex; align-items:center; gap:7px; white-space:nowrap;
+  font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase;
+}
+.trs-stock::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor;}
+.trs-in{color:#4ade80;}
+.trs-out{color:var(--red-bright);}
+.modal-details strong.trs-in{color:#4ade80;}
+.modal-details strong.trs-out{color:var(--red-bright);}
+.trs-add-btn{
+  flex:1; padding:12px 14px; border-radius:3px; cursor:pointer;
+  background:transparent; color:var(--text); border:1px solid var(--line);
+  font:700 13px/1 'Inter',sans-serif; letter-spacing:0.4px;
+  transition:background 0.2s, border-color 0.2s, color 0.2s;
+}
+.trs-add-btn:hover:not(:disabled){background:var(--red); border-color:var(--red); color:#fff;}
+.trs-add-btn:disabled{opacity:0.45; cursor:not-allowed;}
+
+/* ---------- Shared buttons ---------- */
+.trs-btn{
+  display:flex; align-items:center; justify-content:center; width:100%;
+  padding:16px 24px; border-radius:3px; cursor:pointer; border:1px solid transparent;
+  font:800 14px/1 'Inter',sans-serif; letter-spacing:0.7px; text-align:center;
+  transition:all 0.25s ease;
+}
+.trs-btn-primary{background:var(--red); color:#fff; box-shadow:0 8px 30px rgba(232,40,63,0.3);}
+.trs-btn-primary:hover:not(:disabled){background:var(--red-bright); transform:translateY(-2px); box-shadow:0 12px 35px rgba(232,40,63,0.45);}
+.trs-btn-ghost{background:transparent; color:var(--text); border-color:var(--line);}
+.trs-btn-ghost:hover:not(:disabled){border-color:var(--dim); background:var(--surface-2);}
+.trs-btn:disabled{opacity:0.45; cursor:not-allowed; box-shadow:none;}
+.trs-btn[hidden]{display:none;}
+.trs-modal-actions{display:flex; flex-direction:column; gap:12px;}
+.trs-icon-btn{
+  width:40px; height:40px; border-radius:50%; border:1px solid var(--line);
+  background:rgba(10,10,11,0.75); color:var(--text); font-size:26px; line-height:1;
+  cursor:pointer; transition:0.2s ease;
+}
+.trs-icon-btn:hover{color:var(--red-bright); border-color:var(--red-bright);}
+
+/* ---------- Overlay layers ---------- */
+.trs-layer{position:fixed; inset:0; z-index:10050; display:none;}
+.trs-layer.is-open{display:flex;}
+.trs-layer [hidden]{display:none !important;}
+.trs-backdrop{position:absolute; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px);}
+body.trs-lock{overflow:hidden;}
+
+/* ---------- Cart drawer ---------- */
+.trs-drawer{
+  position:absolute; top:0; right:0; bottom:0; width:min(440px,100%);
+  background:var(--surface); border-left:1px solid var(--line);
+  display:flex; flex-direction:column;
+  box-shadow:-30px 0 80px rgba(0,0,0,0.6);
+  animation:trsDrawerIn 0.3s ease;
+}
+@keyframes trsDrawerIn{from{transform:translateX(40px); opacity:0;} to{transform:none; opacity:1;}}
+.trs-drawer-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 24px; border-bottom:1px solid var(--line);
+}
+.trs-drawer-head h2{font-family:var(--display); font-size:30px; letter-spacing:1px; line-height:1;}
+.trs-drawer-body{flex:1; overflow-y:auto; padding:8px 24px;}
+.trs-drawer-foot{padding:20px 24px 24px; border-top:1px solid var(--line); background:var(--surface-2);}
+.trs-empty{text-align:center; padding:70px 10px; color:var(--dim); font-size:15px;}
+.trs-empty .trs-btn{max-width:240px; margin:22px auto 0;}
+
+.trs-item{
+  display:grid; grid-template-columns:72px 1fr auto; gap:14px; align-items:center;
+  padding:18px 0; border-bottom:1px solid var(--line);
+}
+.trs-item img{width:72px; height:72px; object-fit:contain; background:var(--surface-2); border-radius:10px;}
+.trs-item-name{font-weight:700; font-size:15px; margin-bottom:4px;}
+.trs-item-price{font-family:var(--mono); font-size:12px; color:var(--dim); margin-bottom:10px;}
+.trs-qty{display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:3px;}
+.trs-qty button{width:34px; height:34px; background:none; border:0; color:var(--text); font-size:17px; cursor:pointer;}
+.trs-qty button:hover:not(:disabled){color:var(--red-bright);}
+.trs-qty button:disabled{opacity:0.35; cursor:not-allowed;}
+.trs-qty span{min-width:30px; text-align:center; font-family:var(--mono); font-size:13px;}
+.trs-item-side{display:flex; flex-direction:column; align-items:flex-end; gap:12px;}
+.trs-item-total{font-family:var(--mono); font-weight:600; font-size:14px;}
+.trs-remove{background:none; border:0; color:var(--dim-2); font-size:12px; cursor:pointer; text-decoration:underline;}
+.trs-remove:hover{color:var(--red-bright);}
+
+.trs-line{display:flex; justify-content:space-between; padding:6px 0; color:var(--dim); font-size:14px;}
+.trs-line strong{font-family:var(--mono); font-weight:500; color:var(--text);}
+.trs-line.trs-total{
+  color:var(--text); font-size:16px; font-weight:700;
+  border-top:1px solid var(--line); margin-top:8px; padding-top:14px; margin-bottom:18px;
+}
+.trs-line.trs-total strong{font-size:20px; font-weight:600; color:var(--red-bright);}
+.trs-fine{color:var(--dim-2); font-size:12px; line-height:1.6; margin-top:12px;}
+
+/* ---------- Checkout modal ---------- */
+.trs-layer-center{align-items:center; justify-content:center; padding:24px;}
+.trs-checkout{
+  position:relative; z-index:2; width:min(640px,100%); max-height:92vh; overflow-y:auto;
+  background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  padding:40px 36px 34px; box-shadow:0 30px 100px rgba(0,0,0,0.65);
+  animation:trsPop 0.3s ease;
+}
+@keyframes trsPop{from{opacity:0; transform:translateY(20px) scale(0.97);} to{opacity:1; transform:none;}}
+.trs-checkout > .trs-icon-btn{position:absolute; top:16px; right:18px; z-index:3;}
+.trs-checkout h2{font-family:var(--display); font-size:clamp(34px,5vw,46px); letter-spacing:1px; line-height:1; margin:6px 0 20px;}
+.trs-summary{background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:8px;}
+.trs-sum-row{display:flex; justify-content:space-between; gap:12px; font-size:13.5px; padding:5px 0; color:var(--dim);}
+.trs-sum-row strong{font-family:var(--mono); font-weight:500; color:var(--text);}
+.trs-sum-row.trs-sum-total{border-top:1px solid var(--line); margin-top:8px; padding-top:12px; color:var(--text); font-weight:700;}
+.trs-sum-row.trs-sum-total strong{font-size:17px; font-weight:600; color:var(--red-bright);}
+.trs-step{
+  font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:2px; text-transform:uppercase;
+  color:var(--red-bright); margin:28px 0 14px;
+}
+.trs-grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 14px;}
+.trs-field{margin-bottom:14px;}
+.trs-field label{display:block; font-size:12.5px; font-weight:600; letter-spacing:0.3px; color:var(--dim); margin-bottom:7px;}
+.trs-field label i{font-style:normal; font-weight:400; color:var(--dim-2);}
+.trs-field input,.trs-field textarea{
+  width:100%; background:var(--bg); border:1px solid var(--line); color:var(--text);
+  padding:13px 14px; border-radius:3px; font:500 16px 'Inter',sans-serif; resize:vertical;
+}
+.trs-field input:focus,.trs-field textarea:focus{border-color:var(--red-bright);}
+.trs-field input[aria-invalid="true"],.trs-field textarea[aria-invalid="true"]{border-color:var(--red-bright);}
+.trs-field input::placeholder,.trs-field textarea::placeholder{color:var(--dim-2);}
+.trs-err{display:block; color:var(--red-bright); font-size:12.5px; line-height:1.4; margin-top:6px;}
+.trs-err:empty{display:none;}
+.trs-hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+
+.trs-pay{
+  background:linear-gradient(135deg, rgba(232,40,63,0.09), rgba(255,255,255,0.02));
+  border:1px solid rgba(232,40,63,0.35); border-radius:10px; padding:18px; margin-bottom:18px;
+  font-size:14px; line-height:1.6; color:var(--dim);
+}
+.trs-pay-step{display:flex; gap:12px; align-items:flex-start; margin-bottom:14px;}
+.trs-pay-step:last-child{margin-bottom:0;}
+.trs-pay-step > b{
+  flex:none; width:24px; height:24px; border-radius:50%; background:var(--red); color:#fff;
+  font:700 12px/24px var(--mono); text-align:center;
+}
+.trs-pay strong{color:var(--text);}
+.trs-amount{font-family:var(--mono); font-weight:600; color:var(--red-bright);}
+.trs-num-row{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:8px;}
+.trs-num{font-family:var(--mono); font-size:21px; font-weight:600; letter-spacing:1px; color:var(--text);}
+.trs-copy{
+  padding:8px 14px; border-radius:3px; cursor:pointer; background:transparent; color:var(--text);
+  border:1px solid var(--line); font:700 12px/1 'Inter',sans-serif; transition:0.2s ease;
+}
+.trs-copy:hover{border-color:var(--red-bright); color:var(--red-bright);}
+
+.trs-notice{
+  background:rgba(255,193,7,0.08); border:1px solid rgba(255,193,7,0.35); color:#ffd166;
+  padding:12px 14px; border-radius:6px; font-size:13.5px; line-height:1.5; margin:12px 0;
+}
+.trs-form-error{
+  background:rgba(232,40,63,0.1); border:1px solid rgba(232,40,63,0.5); color:#ff9aa6;
+  padding:12px 14px; border-radius:6px; font-size:13.5px; line-height:1.55; margin:6px 0 16px;
+}
+
+.trs-done{text-align:center; padding:16px 0 4px;}
+.trs-done-icon{
+  width:64px; height:64px; margin:0 auto 18px; border-radius:50%;
+  border:2px solid var(--red-bright); color:var(--red-bright);
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+}
+.trs-done h2{margin-bottom:12px;}
+.trs-done p{color:var(--dim); font-size:15px; line-height:1.7; margin-bottom:10px;}
+.trs-done .trs-ref{font-family:var(--mono); font-size:22px; font-weight:600; color:var(--text); letter-spacing:1px; margin:6px 0 18px;}
+.trs-done dl{text-align:left; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:6px 18px; margin:18px 0 22px;}
+.trs-done dl div{display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+.trs-done dl div:last-child{border-bottom:0;}
+.trs-done dt{color:var(--dim-2); font-family:var(--mono); font-size:11px; letter-spacing:1.5px;}
+.trs-done dd{color:var(--text); font-weight:600; text-align:right; word-break:break-word;}
+
+@media (max-width:600px){
+  .trs-layer-center{padding:10px;}
+  .trs-checkout{padding:36px 18px 26px; max-height:95vh;}
+  .trs-grid2{grid-template-columns:1fr;}
+  .trs-item{grid-template-columns:60px 1fr auto;}
+  .trs-item img{width:60px; height:60px;}
+}
+
+/* ABOUT THE OWNER */
+.owner-section {
+  padding: 90px 24px;
+  background: #0a0a0b;
+  color: #fff;
+  border-top: 1px solid #222;
+  overflow: hidden;
+}
+
+.owner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.owner-heading {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.owner-eyebrow,
+.owner-tag {
+  color: #ff4757;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.owner-heading h2 {
+  margin: 12px 0;
+  font-size: clamp(34px, 6vw, 60px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.owner-heading h2 span {
+  color: #e8283f;
+}
+
+.owner-subtitle {
+  color: #aaa;
+  margin: 0;
+  font-size: 15px;
+}
+
+.owner-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.owner-photo-wrap {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #3a171c;
+  border-radius: 12px;
+  background: #121214;
+}
+
+.owner-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 7px;
+  background: #18181b;
+}
+
+.owner-photo-label {
+  display: block;
+  padding: 14px 4px 4px;
+  color: #ff4757;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.owner-story h3 {
+  margin: 12px 0 20px;
+  font-size: clamp(23px, 3vw, 32px);
+  line-height: 1.2;
+}
+
+.owner-story > p {
+  color: #bcbcc2;
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 0 0 15px;
+}
+
+.owner-story strong {
+  color: #fff;
+}
+
+.owner-mission {
+  margin: 24px 0;
+  padding: 20px;
+  border-left: 3px solid #e8283f;
+  background: #151113;
+  border-radius: 0 8px 8px 0;
+}
+
+.owner-mission span {
+  color: #ff4757;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.owner-mission p {
+  margin: 9px 0 0;
+  color: #fff;
+  line-height: 1.7;
+}
+
+.owner-story > .owner-signoff {
+  color: #fff;
+  font-weight: 700;
+}
+
+.owner-story > .owner-joke {
+  color: #888;
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .owner-section {
+    padding: 64px 20px;
+  }
+
+  .owner-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .owner-photo-wrap {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+</style>
+
+
+<!-- ===== Cart drawer ===== -->
+<div class="trs-layer" id="trs-cart-layer">
+  <div class="trs-backdrop" data-trs-close></div>
+  <div class="trs-drawer" role="dialog" aria-modal="true" aria-labelledby="trs-cart-title">
+    <div class="trs-drawer-head">
+      <h2 id="trs-cart-title">YOUR CART</h2>
+      <button type="button" class="trs-icon-btn" id="trs-cart-close" data-trs-close aria-label="Close cart">×</button>
+    </div>
+    <div class="trs-drawer-body" id="trs-cart-items"></div>
+    <div class="trs-drawer-foot" id="trs-cart-foot" hidden>
+      <div class="trs-line"><span>Subtotal</span><strong id="trs-cart-subtotal"></strong></div>
+      <div class="trs-line"><span>Delivery</span><strong id="trs-cart-delivery"></strong></div>
+      <div class="trs-line trs-total"><span>Total</span><strong id="trs-cart-total"></strong></div>
+      <button type="button" class="trs-btn trs-btn-primary" id="trs-go-checkout">CHECKOUT →</button>
+      <p class="trs-fine">You pay by bKash (Send Money). Every payment is checked by hand before your order is confirmed.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== Checkout ===== -->
+<div class="trs-layer trs-layer-center" id="trs-checkout-layer">
+  <div class="trs-backdrop" data-trs-close></div>
+  <div class="trs-checkout" id="trs-checkout-box" role="dialog" aria-modal="true" aria-labelledby="trs-checkout-title">
+    <button type="button" class="trs-icon-btn" id="trs-checkout-close" data-trs-close aria-label="Close checkout">×</button>
+
+    <!-- Form view -->
+    <div id="trs-form-view">
+      <div class="section-tag">TRS VISION</div>
+      <h2 id="trs-checkout-title">CHECKOUT</h2>
+
+      <div class="trs-notice" id="trs-setup-notice" hidden>Checkout is being set up and will be available soon. Please check back shortly.</div>
+
+      <div class="trs-summary" id="trs-checkout-summary"></div>
+
+      <form id="trs-checkout-form" novalidate>
+
+        <div class="trs-step">1 · Delivery details</div>
+
+        <div class="trs-grid2">
+          <div class="trs-field">
+            <label for="trs-f-name">Full name</label>
+            <input id="trs-f-name" name="name" type="text" maxlength="80" autocomplete="name" aria-describedby="trs-e-name">
+            <small class="trs-err" id="trs-e-name"></small>
+          </div>
+          <div class="trs-field">
+            <label for="trs-f-phone">Mobile number</label>
+            <input id="trs-f-phone" name="phone" type="tel" inputmode="tel" maxlength="20" placeholder="01XXXXXXXXX" autocomplete="tel" aria-describedby="trs-e-phone">
+            <small class="trs-err" id="trs-e-phone"></small>
+          </div>
+        </div>
+
+        <div class="trs-field">
+          <label for="trs-f-address">Full delivery address</label>
+          <textarea id="trs-f-address" name="address" rows="2" maxlength="300" placeholder="House, road, area" autocomplete="street-address" aria-describedby="trs-e-address"></textarea>
+          <small class="trs-err" id="trs-e-address"></small>
+        </div>
+
+        <div class="trs-field">
+          <label for="trs-f-city">City / District</label>
+          <input id="trs-f-city" name="city" type="text" maxlength="60" autocomplete="address-level2" aria-describedby="trs-e-city">
+          <small class="trs-err" id="trs-e-city"></small>
+        </div>
+
+        <div class="trs-field">
+          <label for="trs-f-notes">Notes <i>(optional)</i></label>
+          <textarea id="trs-f-notes" name="notes" rows="2" maxlength="300" placeholder="Anything we should know about delivery?"></textarea>
+        </div>
+
+        <div class="trs-step">2 · Pay with bKash</div>
+
+        <div class="trs-pay" id="trs-pay-box">
+          <div class="trs-pay-step"><b>1</b><span>Open the <strong>bKash app</strong> and choose <strong>Send Money</strong>.</span></div>
+          <div class="trs-pay-step"><b>2</b><span>Send exactly <span class="trs-amount" id="trs-pay-amount"></span> to this number:
+            <span class="trs-num-row"><span class="trs-num" id="trs-pay-number"></span><button type="button" class="trs-copy" id="trs-copy-num">Copy</button></span>
+          </span></div>
+          <div class="trs-pay-step"><b>3</b><span>Copy the <strong>Transaction ID (TrxID)</strong> from the bKash confirmation and enter it below.</span></div>
+        </div>
+
+        <div class="trs-grid2">
+          <div class="trs-field">
+            <label for="trs-f-trx">bKash Transaction ID (TrxID)</label>
+            <input id="trs-f-trx" name="trx" type="text" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. 8N7A6D5EE7" aria-describedby="trs-e-trx">
+            <small class="trs-err" id="trs-e-trx"></small>
+          </div>
+          <div class="trs-field">
+            <label for="trs-f-sender">bKash number you paid from</label>
+            <input id="trs-f-sender" name="sender" type="tel" inputmode="tel" maxlength="20" placeholder="01XXXXXXXXX" autocomplete="off" aria-describedby="trs-e-sender">
+            <small class="trs-err" id="trs-e-sender"></small>
+          </div>
+        </div>
+
+        <!-- spam trap: real people never see or fill this -->
+        <div class="trs-hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" id="trs-f-hp" tabindex="-1" autocomplete="off"></label></div>
+
+        <div class="trs-form-error" id="trs-form-error" role="alert" hidden></div>
+
+        <button type="submit" class="trs-btn trs-btn-primary" id="trs-submit">PLACE ORDER</button>
+        <p class="trs-fine">After you place the order its status is <strong>“Payment verification pending”</strong> until we check your bKash payment by hand. We will contact you on the mobile number above.</p>
+      </form>
+    </div>
+
+    <!-- Done view -->
+    <div id="trs-done-view" class="trs-done" hidden>
+      <div class="trs-done-icon" aria-hidden="true">✓</div>
+      <h2 id="trs-done-title" tabindex="-1">ORDER RECEIVED</h2>
+      <p>Thank you! We have your order. <strong>Payment verification is pending</strong> — we will check your bKash payment and then contact you.</p>
+      <div class="trs-ref" id="trs-done-ref"></div>
+      <dl>
+        <div><dt>STATUS</dt><dd>Payment verification pending</dd></div>
+        <div><dt>TRXID</dt><dd id="trs-done-trx"></dd></div>
+        <div><dt>WE WILL CALL</dt><dd id="trs-done-phone"></dd></div>
+      </dl>
+      <p class="trs-fine">Keep your order reference and TrxID until your watch arrives.</p>
+      <button type="button" class="trs-btn trs-btn-ghost" id="trs-done-close" style="margin-top:18px;">BACK TO THE SITE</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function () {
+  "use strict";
+
+  /* Settings and products come from the watch-shop script higher up the page. */
+  const S = TRS_SHOP_SETTINGS;
+  const P = watchProducts;
+  const fmt = trsFormatMoney;
+
+  const CART_KEY = "trs-cart-v1";
+  const MAX_QTY = Math.max(1, Math.floor(Number(S.maxQtyPerItem)) || 5);
+  const DELIVERY = Math.max(0, Number(S.deliveryCharge) || 0);
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;   /* textContent only: nothing typed by a customer is ever treated as HTML */
+    return n;
+  }
+
+  /* ---------------------------------------------------------------
+     Cart data. Only {id, qty} is saved in the browser; prices always
+     come from watchProducts, so edited saved data cannot change a price.
+     --------------------------------------------------------------- */
+  let cartNotice = "";
+
+  function loadCart() {
+    let raw = [];
+    try { raw = JSON.parse(window.localStorage.getItem(CART_KEY) || "[]"); } catch (e) { raw = []; }
+    if (!Array.isArray(raw)) raw = [];
+    const out = [];
+    const seen = {};
+    let dropped = false;
+    raw.forEach(function (it) {
+      if (!it || typeof it.id !== "string" || seen[it.id]) return;
+      if (!Object.prototype.hasOwnProperty.call(P, it.id)) return;
+      seen[it.id] = true;
+      if (!P[it.id].inStock) { dropped = true; return; }
+      const q = Math.floor(Number(it.qty));
+      if (!(q >= 1)) return;
+      out.push({ id: it.id, qty: Math.min(q, MAX_QTY) });
+    });
+    if (dropped) cartNotice = "Some watches are out of stock now and were removed from your cart.";
+    return out;
+  }
+
+  let cart = loadCart();
+
+  function saveCart() {
+    try { window.localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* private mode etc. - the cart just won't persist */ }
+  }
+  function countItems() { return cart.reduce(function (n, it) { return n + it.qty; }, 0); }
+  function subtotal() { return cart.reduce(function (s, it) { return s + P[it.id].price * it.qty; }, 0); }
+  function grandTotal() { return cart.length ? subtotal() + DELIVERY : 0; }
+  function findItem(id) { return cart.find(function (x) { return x.id === id; }); }
+
+  function addToCart(id) {
+    const p = P[id];
+    if (!p || !p.inStock) return false;
+    const it = findItem(id);
+    if (it) it.qty = Math.min(it.qty + 1, MAX_QTY);
+    else cart.push({ id: id, qty: 1 });
+    cartNotice = "";
+    saveCart();
+    renderCart();
+    return true;
+  }
+  function changeQty(id, delta) {
+    const it = findItem(id);
+    if (!it) return;
+    it.qty += delta;
+    if (it.qty < 1) cart = cart.filter(function (x) { return x.id !== id; });
+    else if (it.qty > MAX_QTY) it.qty = MAX_QTY;
+    saveCart();
+    renderCart();
+  }
+  function removeItem(id) {
+    cart = cart.filter(function (x) { return x.id !== id; });
+    saveCart();
+    renderCart();
+  }
+
+  /* ---------------------------------------------------------------
+     Drawing the cart
+     --------------------------------------------------------------- */
+  function qtyButton(act, id, label, aria, disabled) {
+    const b = el("button", null, label);
+    b.type = "button";
+    b.setAttribute("data-trs-act", act);
+    b.setAttribute("data-trs-id", id);
+    b.setAttribute("aria-label", aria);
+    b.disabled = !!disabled;
+    return b;
+  }
+
+  function buildRow(it) {
+    const p = P[it.id];
+    const row = el("div", "trs-item");
+
+    const img = el("img");
+    img.src = p.image;
+    img.alt = p.name;
+    row.appendChild(img);
+
+    const info = el("div");
+    info.appendChild(el("div", "trs-item-name", p.name));
+    info.appendChild(el("div", "trs-item-price", fmt(p.price) + " each"));
+    const qty = el("div", "trs-qty");
+    qty.appendChild(qtyButton("dec", it.id, "−", "Decrease quantity of " + p.name, false));
+    qty.appendChild(el("span", null, String(it.qty)));
+    qty.appendChild(qtyButton("inc", it.id, "+", "Increase quantity of " + p.name, it.qty >= MAX_QTY));
+    info.appendChild(qty);
+    row.appendChild(info);
+
+    const side = el("div", "trs-item-side");
+    side.appendChild(el("div", "trs-item-total", fmt(p.price * it.qty)));
+    const rm = el("button", "trs-remove", "Remove");
+    rm.type = "button";
+    rm.setAttribute("data-trs-act", "rm");
+    rm.setAttribute("data-trs-id", it.id);
+    rm.setAttribute("aria-label", "Remove " + p.name + " from cart");
+    side.appendChild(rm);
+    row.appendChild(side);
+
+    return row;
+  }
+
+  function renderCart() {
+    const n = countItems();
+    const badge = $("trs-cart-count");
+    badge.textContent = String(n);
+    badge.hidden = n === 0;
+    $("trs-cart-open").setAttribute("aria-label",
+      n ? "Open cart, " + n + (n === 1 ? " item" : " items") : "Open cart");
+
+    const body = $("trs-cart-items");
+    body.textContent = "";
+    if (cartNotice) body.appendChild(el("div", "trs-notice", cartNotice));
+
+    $("trs-cart-foot").hidden = !cart.length;
+
+    if (!cart.length) {
+      const empty = el("div", "trs-empty");
+      empty.appendChild(el("p", null, "Your cart is empty."));
+      const a = el("a", "trs-btn trs-btn-ghost", "Browse watches");
+      a.href = "#watches";
+      a.setAttribute("data-trs-close", "");
+      empty.appendChild(a);
+      body.appendChild(empty);
+      return;
+    }
+
+    cart.forEach(function (it) { body.appendChild(buildRow(it)); });
+    $("trs-cart-subtotal").textContent = fmt(subtotal());
+    $("trs-cart-delivery").textContent = fmt(DELIVERY);
+    $("trs-cart-total").textContent = fmt(grandTotal());
+  }
+
+  /* Price / stock / button state on the watch cards (single source: watchProducts) */
+  function refreshCards() {
+    Object.keys(P).forEach(function (id) {
+      const p = P[id];
+      const priceEl = document.querySelector('[data-trs-price="' + id + '"]');
+      if (priceEl) priceEl.textContent = fmt(p.price);
+      const stockEl = document.querySelector('[data-trs-stock="' + id + '"]');
+      if (stockEl) {
+        stockEl.textContent = p.inStock ? "In stock" : "Out of stock";
+        stockEl.className = "trs-stock " + (p.inStock ? "trs-in" : "trs-out");
+      }
+      const btn = document.querySelector('[data-trs-add="' + id + '"]');
+      if (btn) {
+        btn.disabled = !p.inStock;
+        btn.textContent = p.inStock ? "Add to Cart" : "Unavailable";
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     Opening / closing the cart drawer and checkout
+     --------------------------------------------------------------- */
+  const layers = { cart: $("trs-cart-layer"), checkout: $("trs-checkout-layer") };
+  let openLayer = null;
+  let lastFocus = null;
+
+  function openLayerNamed(name) {
+    if (openLayer && openLayer !== name) layers[openLayer].classList.remove("is-open");
+    else if (!openLayer) lastFocus = document.activeElement;
+    openLayer = name;
+    layers[name].classList.add("is-open");
+    document.body.classList.add("trs-lock");
+    const first = name === "cart" ? $("trs-cart-close") : $("trs-checkout-close");
+    first.focus({ preventScroll: true });
+  }
+
+  function closeLayer() {
+    if (!openLayer) return;
+    layers[openLayer].classList.remove("is-open");
+    openLayer = null;
+    document.body.classList.remove("trs-lock");
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      try { lastFocus.focus({ preventScroll: true }); } catch (e) { /* element may be gone */ }
+    }
+    lastFocus = null;
+  }
+
+  /* Esc closes; Tab stays inside the open panel */
+  document.addEventListener("keydown", function (e) {
+    if (!openLayer) return;
+    if (e.key === "Escape") { closeLayer(); return; }
+    if (e.key !== "Tab") return;
+    const box = layers[openLayer].querySelector('[role="dialog"]');
+    const items = Array.prototype.filter.call(
+      box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),textarea:not([disabled])'),
+      function (n) { return n.tabIndex >= 0 && n.offsetParent !== null; }
+    );
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* ---------------------------------------------------------------
+     Checkout
+     --------------------------------------------------------------- */
+  function normPhone(v) {
+    let s = String(v).replace(/[\s\-().]/g, "");
+    if (s.indexOf("+880") === 0) s = "0" + s.slice(4);
+    else if (s.indexOf("880") === 0 && s.length === 13) s = "0" + s.slice(3);
+    return s;
+  }
+  function phoneOk(s) { return /^01[3-9]\d{8}$/.test(s); }
+
+  function bkashNumber() { return normPhone(S.bkashNumber || ""); }
+  function bkashOk() { return phoneOk(bkashNumber()); }
+  function endpointOk() { return /^https:\/\/\S+$/.test(String(S.orderEndpoint || "")); }
+  function shopReady() { return bkashOk() && endpointOk(); }
+
+  let setupWarned = false;
+  function warnIfNotReady() {
+    if (setupWarned || shopReady()) return;
+    setupWarned = true;
+    if (!bkashOk()) console.warn("[TRS shop] Checkout is off: put your bKash number in TRS_SHOP_SETTINGS.bkashNumber (11 digits, starts with 01).");
+    if (!endpointOk()) console.warn("[TRS shop] Checkout is off: put your Formspree order link in TRS_SHOP_SETTINGS.orderEndpoint (starts with https://).");
+  }
+
+  function fillSummary() {
+    const box = $("trs-checkout-summary");
+    box.textContent = "";
+    function row(label, value, extra) {
+      const r = el("div", "trs-sum-row" + (extra ? " " + extra : ""));
+      r.appendChild(el("span", null, label));
+      r.appendChild(el("strong", null, value));
+      box.appendChild(r);
+    }
+    cart.forEach(function (it) {
+      row(P[it.id].name + " × " + it.qty, fmt(P[it.id].price * it.qty));
+    });
+    row("Delivery", fmt(DELIVERY));
+    row("Total to pay", fmt(grandTotal()), "trs-sum-total");
+    $("trs-pay-amount").textContent = fmt(grandTotal());
+  }
+
+  function clearErrors() {
+    ["name", "phone", "address", "city", "trx", "sender"].forEach(function (k) {
+      $("trs-e-" + k).textContent = "";
+      $("trs-f-" + k).removeAttribute("aria-invalid");
+    });
+    $("trs-form-error").hidden = true;
+  }
+
+  function openCheckout() {
+    if (!cart.length) { openLayerNamed("cart"); return; }
+    fillSummary();
+    clearErrors();
+    $("trs-form-view").hidden = false;
+    $("trs-done-view").hidden = true;
+
+    const ready = shopReady();
+    $("trs-setup-notice").hidden = ready;
+    $("trs-pay-box").hidden = !bkashOk();
+    $("trs-pay-number").textContent = bkashOk() ? bkashNumber() : "";
+    $("trs-submit").disabled = !ready;
+    $("trs-submit").textContent = "PLACE ORDER";
+    warnIfNotReady();
+
+    $("trs-checkout-box").scrollTop = 0;
+    openLayerNamed("checkout");
+  }
+
+  function buyNow(id) {
+    const p = P[id];
+    if (!p || !p.inStock) return;
+    if (!findItem(id)) addToCart(id);
+    if (typeof closeWatchDetails === "function") closeWatchDetails();
+    openCheckout();
+  }
+
+  /* Copy button for the bKash number */
+  $("trs-copy-num").addEventListener("click", function () {
+    const btn = this;
+    const text = bkashNumber();
+    function done(ok) {
+      btn.textContent = ok ? "Copied ✓" : "Copy failed";
+      window.setTimeout(function () { btn.textContent = "Copy"; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      return;
+    }
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;left:-9999px;top:0;";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      done(ok);
+    } catch (e) { done(false); }
+  });
+
+  /* ---------------------------------------------------------------
+     Validation + sending the order
+     --------------------------------------------------------------- */
+  const rules = [
+    ["name",    function (v) { return v.trim().length >= 2 ? "" : "Please enter your full name."; }],
+    ["phone",   function (v) { return phoneOk(normPhone(v)) ? "" : "Enter a valid Bangladesh mobile number, like 01XXXXXXXXX."; }],
+    ["address", function (v) { return v.trim().length >= 8 ? "" : "Please enter your full delivery address."; }],
+    ["city",    function (v) { return v.trim().length >= 2 ? "" : "Please enter your city or district."; }],
+    ["trx",     function (v) { return /^[A-Za-z0-9]{8,14}$/.test(v.trim()) ? "" : "Enter the bKash Transaction ID (TrxID) from your payment confirmation: 8–14 letters and numbers, no spaces."; }],
+    ["sender",  function (v) { return phoneOk(normPhone(v)) ? "" : "Enter the bKash number you paid from, like 01XXXXXXXXX."; }]
+  ];
+
+  function validate() {
+    let firstBad = null;
+    rules.forEach(function (r) {
+      const input = $("trs-f-" + r[0]);
+      const msg = r[1](input.value);
+      $("trs-e-" + r[0]).textContent = msg;
+      if (msg) {
+        input.setAttribute("aria-invalid", "true");
+        if (!firstBad) firstBad = input;
+      } else {
+        input.removeAttribute("aria-invalid");
+      }
+    });
+    return firstBad;
+  }
+
+  rules.forEach(function (r) {
+    $("trs-f-" + r[0]).addEventListener("input", function () {
+      this.removeAttribute("aria-invalid");
+      $("trs-e-" + r[0]).textContent = "";
+    });
+  });
+
+  function showFormError(msg) {
+    const box = $("trs-form-error");
+    box.textContent = msg;
+    box.hidden = false;
+  }
+
+  /* One reference per order attempt, so a retry never creates a "different" order */
+  let currentRef = "";
+  function makeRef() {
+    const d = new Date();
+    const pad = function (n) { return String(n).padStart(2, "0"); };
+    const letters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let tail = "";
+    for (let i = 0; i < 4; i++) tail += letters.charAt(Math.floor(Math.random() * letters.length));
+    return "TRS-" + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + pad(d.getDate()) + "-" + tail;
+  }
+
+  function bdt(n) { return "BDT " + Number(n).toLocaleString("en-US"); }
+
+  let sending = false;
+
+  $("trs-checkout-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (sending) return;
+    $("trs-form-error").hidden = true;
+
+    if ($("trs-f-hp").value) return;                       /* spam trap was filled in by a bot */
+    if (!shopReady()) { warnIfNotReady(); return; }
+
+    /* stock may have been changed in the file / another tab since the cart was filled */
+    const before = cart.length;
+    cart = cart.filter(function (it) { return P[it.id] && P[it.id].inStock; });
+    if (cart.length !== before) {
+      cartNotice = "Some watches are out of stock now and were removed from your cart.";
+      saveCart();
+      renderCart();
+      if (!cart.length) { showFormError("Sorry, the watches in your cart are out of stock now."); return; }
+      fillSummary();
+      showFormError("A watch in your cart just went out of stock and was removed. Please check the new total, and only pay the amount shown.");
+      return;
+    }
+    if (!cart.length) { showFormError("Your cart is empty."); return; }
+
+    const bad = validate();
+    if (bad) { bad.focus(); return; }
+
+    if (!currentRef) currentRef = makeRef();
+
+    const phone = normPhone($("trs-f-phone").value);
+    const trx = $("trs-f-trx").value.trim().toUpperCase();
+    const sender = normPhone($("trs-f-sender").value);
+
+    const lines = cart.map(function (it) {
+      const p = P[it.id];
+      return p.name + " x " + it.qty + " @ " + bdt(p.price) + " = " + bdt(p.price * it.qty);
+    });
+
+    const payload = {
+      _subject: "New TRS VISION order " + currentRef + " - payment verification pending",
+      order_ref: currentRef,
+      payment_status: "Payment verification pending",
+      payment_method: "bKash (manual Send Money)",
+      customer_name: $("trs-f-name").value.trim(),
+      customer_phone: phone,
+      delivery_address: $("trs-f-address").value.trim(),
+      city: $("trs-f-city").value.trim(),
+      notes: $("trs-f-notes").value.trim(),
+      bkash_trx_id: trx,
+      bkash_sender_number: sender,
+      items: lines.join("\n"),
+      subtotal: bdt(subtotal()),
+      delivery: bdt(DELIVERY),
+      total_to_receive: bdt(grandTotal()),
+      placed_at: new Date().toISOString()
+    };
+
+    const submitBtn = $("trs-submit");
+    sending = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "SENDING…";
+
+    fetch(S.orderEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const ref = currentRef;
+      currentRef = "";
+      cart = [];
+      cartNotice = "";
+      saveCart();
+      renderCart();
+      $("trs-checkout-form").reset();
+
+      $("trs-done-ref").textContent = ref;
+      $("trs-done-trx").textContent = trx;
+      $("trs-done-phone").textContent = phone;
+      $("trs-form-view").hidden = true;
+      $("trs-done-view").hidden = false;
+      $("trs-checkout-box").scrollTop = 0;
+      $("trs-done-title").focus({ preventScroll: true });
+    }).catch(function () {
+      showFormError("We couldn’t send your order. Your cart is saved. If you have already sent the bKash payment, keep your TrxID and press Place Order again in a moment — please don’t send the money twice.");
+    }).then(function () {
+      sending = false;
+      submitBtn.disabled = !shopReady();
+      submitBtn.textContent = "PLACE ORDER";
+    });
+  });
+
+  /* ---------------------------------------------------------------
+     Wiring
+     --------------------------------------------------------------- */
+  $("trs-cart-open").addEventListener("click", function () { openLayerNamed("cart"); });
+
+  document.querySelectorAll("[data-trs-add]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (addToCart(btn.getAttribute("data-trs-add"))) openLayerNamed("cart");
+    });
+  });
+
+  /* Product popup buttons (bound directly: the popup stops clicks from bubbling out of it) */
+  function modalKey() { return $("watch-modal").dataset.product || ""; }
+  $("modal-add-button").addEventListener("click", function () {
+    if (addToCart(modalKey())) {
+      if (typeof closeWatchDetails === "function") closeWatchDetails();
+      openLayerNamed("cart");
+    }
+  });
+  $("modal-buy-button").addEventListener("click", function () { buyNow(modalKey()); });
+
+  layers.cart.addEventListener("click", function (e) {
+    const t = e.target;
+    if (t.closest("[data-trs-close]")) { closeLayer(); return; }
+    if (t.closest("#trs-go-checkout")) { openCheckout(); return; }
+    const b = t.closest("[data-trs-act]");
+    if (!b) return;
+    const id = b.getAttribute("data-trs-id");
+    const act = b.getAttribute("data-trs-act");
+    if (act === "inc") changeQty(id, 1);
+    else if (act === "dec") changeQty(id, -1);
+    else if (act === "rm") removeItem(id);
+
+    /* keep keyboard focus somewhere sensible after the list is redrawn */
+    const body = $("trs-cart-items");
+    const again = body.querySelector('[data-trs-act="' + act + '"][data-trs-id="' + id + '"]:not(:disabled)') ||
+                  body.querySelector('[data-trs-act="dec"][data-trs-id="' + id + '"]') ||
+                  $("trs-cart-close");
+    again.focus({ preventScroll: true });
+  });
+
+  layers.checkout.addEventListener("click", function (e) {
+    if (e.target.closest("[data-trs-close]") || e.target.closest("#trs-done-close")) closeLayer();
+  });
+
+  /* keep two open tabs in step */
+  window.addEventListener("storage", function (e) {
+    if (e.key !== CART_KEY) return;
+    cart = loadCart();
+    renderCart();
+    if (openLayer === "checkout") {
+      if (!cart.length && !$("trs-form-view").hidden) closeLayer();
+      else if (!$("trs-form-view").hidden) fillSummary();
+    }
+  });
+
+  refreshCards();
+  renderCart();
+})();
+</script>
+<!-- ===== TRS VISION CART & CHECKOUT — END ===== -->
+
+<!-- ===== TRS VISION FORBIDDEN RED BUTTON — START ===== -->
+<style>
+  #trs-forbidden-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100000;
+    padding: 12px 16px;
+    border: 1px solid #ff3048;
+    border-radius: 8px;
+    background: #170508;
+    color: #ff4055;
+    font: 800 11px/1.2 monospace;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    box-shadow: 0 0 18px #ff304833;
+    animation: trs-forbidden-glow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes trs-forbidden-glow {
+    50% { box-shadow: 0 0 28px #ff304877; }
+  }
+
+  #trs-forbidden-overlay[hidden] { display: none !important; }
+
+  #trs-forbidden-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+    padding: 22px;
+    background: rgba(4, 0, 2, .97);
+    color: #f5f5f5;
+    font-family: monospace;
+  }
+
+  #trs-forbidden-panel {
+    width: min(100%, 580px);
+    padding: clamp(22px, 5vw, 42px);
+    border: 1px solid #8f1729;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #160609, #080808 65%);
+    box-shadow: 0 0 65px #e8283f20;
+    text-align: center;
+    animation: trs-forbidden-enter .45s ease-out both;
+  }
+
+  @keyframes trs-forbidden-enter {
+    from { opacity: 0; transform: translateY(12px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  #trs-forbidden-eyebrow {
+    color: #ff4055;
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+
+  #trs-forbidden-title {
+    margin: 18px 0;
+    color: #ff3048;
+    font-size: clamp(25px, 6vw, 43px);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  #trs-forbidden-log {
+    min-height: 112px;
+    margin: 24px 0;
+    padding: 18px;
+    border: 1px solid #ffffff17;
+    border-radius: 6px;
+    background: #0008;
+    color: #d6d6d6;
+    font-size: 13px;
+    line-height: 1.9;
+    text-align: left;
+    white-space: pre-line;
+  }
+
+  #trs-forbidden-progress {
+    width: 100%;
+    height: 4px;
+    overflow: hidden;
+    margin: 18px 0;
+    background: #381017;
+  }
+
+  #trs-forbidden-bar {
+    width: 0;
+    height: 100%;
+    background: #ff3048;
+    transition: width .35s ease;
+  }
+
+  .trs-forbidden-action {
+    margin: 5px;
+    padding: 13px 17px;
+    border: 1px solid #ff4055;
+    border-radius: 5px;
+    background: #ff3048;
+    color: #100205;
+    font: 800 11px monospace;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  .trs-forbidden-action.secondary {
+    background: transparent;
+    color: #ff6b7b;
+  }
+
+  .trs-forbidden-action:focus-visible,
+  #trs-forbidden-button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 480px) {
+    #trs-forbidden-button {
+      right: 12px;
+      bottom: 12px;
+      padding: 11px 12px;
+    }
+    #trs-forbidden-overlay { padding: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #trs-forbidden-button,
+    #trs-forbidden-panel { animation: none !important; }
+    #trs-forbidden-bar { transition: none; }
+  }
+</style>
+
+<button id="trs-forbidden-button" type="button">
+  ⚠ DO NOT PRESS
+</button>
+
+<div id="trs-forbidden-overlay" hidden
+     role="dialog" aria-modal="true"
+     aria-labelledby="trs-forbidden-title">
+  <section id="trs-forbidden-panel">
+    <div id="trs-forbidden-eyebrow">TRS VISION // RESTRICTED SYSTEM</div>
+    <h2 id="trs-forbidden-title">YOU HAVE MADE A TERRIBLE DECISION.</h2>
+    <div id="trs-forbidden-log" aria-live="polite">
+      System standing by...
+    </div>
+    <div id="trs-forbidden-progress" aria-hidden="true">
+      <div id="trs-forbidden-bar"></div>
+    </div>
+    <div id="trs-forbidden-actions">
+      <button class="trs-forbidden-action" id="trs-forbidden-close"
+              type="button">I REGRET NOTHING</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const button = document.getElementById("trs-forbidden-button");
+  const overlay = document.getElementById("trs-forbidden-overlay");
+  const title = document.getElementById("trs-forbidden-title");
+  const log = document.getElementById("trs-forbidden-log");
+  const bar = document.getElementById("trs-forbidden-bar");
+  const actions = document.getElementById("trs-forbidden-actions");
+  const closeButton = document.getElementById("trs-forbidden-close");
+
+  if (!button || !overlay || !title || !log || !bar || !actions) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let timers = [];
+  let previousFocus = null;
+  let oldOverflow = "";
+  let isOpen = false;
+
+  function clearTimers() {
+    timers.forEach(function (id) {
+      clearTimeout(id);
+    });
+    timers = [];
+  }
+
+  function later(callback, delay) {
+    timers.push(setTimeout(callback, reducedMotion ? 0 : delay));
+  }
+
+  function closeSurprise() {
+    clearTimers();
+    overlay.hidden = true;
+    document.body.style.overflow = oldOverflow;
+    isOpen = false;
+
+    if (previousFocus && previousFocus.isConnected) {
+      previousFocus.focus({ preventScroll: true });
+    } else {
+      button.focus({ preventScroll: true });
+    }
+  }
+
+  function showActions() {
+    actions.replaceChildren();
+
+    const replay = document.createElement("button");
+    replay.type = "button";
+    replay.className = "trs-forbidden-action";
+    replay.textContent = "TRY YOUR LUCK AGAIN";
+    replay.addEventListener("click", startSurprise);
+
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "trs-forbidden-action secondary";
+    close.textContent = "ESCAPE";
+    close.addEventListener("click", closeSurprise);
+
+    actions.append(replay, close);
+    replay.focus({ preventScroll: true });
+  }
+
+  function startSurprise() {
+    clearTimers();
+
+    if (!isOpen) {
+      previousFocus = document.activeElement;
+      oldOverflow = document.body.style.overflow;
+      overlay.hidden = false;
+      document.body.style.overflow = "hidden";
+      isOpen = true;
+    }
+
+    title.textContent = "YOU HAVE MADE A TERRIBLE DECISION.";
+    log.textContent = "";
+    bar.style.width = "0%";
+    actions.replaceChildren();
+
+    const messages = [
+      "TRS VISION SECURITY SYSTEM ACTIVATED...",
+      "Scanning visitor...",
+      "Detecting suspicious behaviour...",
+      "Checking watch addiction levels...",
+      "Calculating financial damage...",
+      "DIAGNOSIS: 100% CERTIFIED WATCH ADDICT.",
+      "There was a button that said DO NOT PRESS.",
+      "And you pressed it. Incredible.",
+      "Congratulations. You have officially wasted valuable seconds on a watch website."
+    ];
+
+    if (reducedMotion) {
+      log.textContent = messages.join("\n");
+      bar.style.width = "100%";
+      title.textContent = "DIAGNOSIS: WATCH ADDICT.";
+      showActions();
+      return;
+    }
+
+    messages.forEach(function (message, index) {
+      later(function () {
+        log.textContent += (log.textContent ? "\n" : "") + "> " + message;
+        bar.style.width = ((index + 1) / messages.length * 100) + "%";
+
+        if (index === messages.length - 1) {
+          title.textContent = "I REGRET NOTHING.";
+          showActions();
+        }
+      }, 650 * (index + 1));
+    });
+  }
+
+  
+  // ===== TRS VISION SECRET LEVEL 2 — FIXED =====
+  let trsSecretClicks = 0;
+  let trsSecretFirstClick = 0;
+  let trsSecretFastClicks = 0;
+  let trsSecretUnlocked = false;
+  let trsBonusUnlocked = false;
+
+  button.addEventListener("click", function () {
+    const now = Date.now();
+
+    // Count clicks across the whole visit.
+    trsSecretClicks++;
+
+    // Track clicks made within a rolling 3-second window.
+    if (!trsSecretFirstClick || now - trsSecretFirstClick > 3000) {
+      trsSecretFirstClick = now;
+      trsSecretFastClicks = 1;
+    } else {
+      trsSecretFastClicks++;
+    }
+
+    // Run the original surprise animation.
+    startSurprise();
+
+    // Stop its scheduled messages from overwriting our secret.
+    if (trsSecretClicks >= 5 && !trsSecretUnlocked) {
+      trsSecretUnlocked = true;
+      clearTimers();
+
+      title.textContent = "SECRET LEVEL 2 UNLOCKED";
+      log.textContent =
+        "ACCESS GRANTED.\n\n" +
+        "You found something most visitors will never see.\n\n" +
+        "TRS VISION // INNER CIRCLE\n" +
+        "Driven by ambition. Powered by creativity.\n\n" +
+        "But wait... there's another secret.";
+
+      bar.style.width = "100%";
+      showActions();
+    }
+
+    // Five rapid clicks unlock the bonus message.
+    if (trsSecretFastClicks >= 5 && !trsBonusUnlocked) {
+      trsBonusUnlocked = true;
+      clearTimers();
+
+      title.textContent = "YOU FOUND THE DEEP SECRET.";
+      log.textContent =
+        "CLASSIFIED MESSAGE UNLOCKED.\n\n" +
+        "You weren't supposed to find this.\n\n" +
+        "WELCOME TO THE TRS VISION INNER CIRCLE.\n\n" +
+        "The real flex isn't what you own.\n" +
+        "It's what you're building.";
+
+      bar.style.width = "100%";
+      showActions();
+    }
+  });
+  // ===== END SECRET LEVEL 2 =====
+
+  closeButton.addEventListener("click", closeSurprise);
+
+  overlay.addEventListener("click", function (event) {
+    if (event.target === overlay) closeSurprise();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (!isOpen) return;
+
+    if (event.key === "Escape") {
+      closeSurprise();
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusable = overlay.querySelectorAll("button:not(:disabled)");
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+})();
+</script>
+<!-- ===== TRS VISION FORBIDDEN RED BUTTON — END ===== -->
+
+
+<!-- ===== TRS VISION TALKING WATCH — START ===== -->
+<style>
+  #trs-talking-watch {
+    position: fixed;
+    left: 0;
+    bottom: 24px;
+    z-index: 2147483647;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    width: min(340px, calc(100vw - 16px));
+    padding: 10px;
+    box-sizing: border-box;
+    transform: translateX(calc(-100% - 20px));
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .55s cubic-bezier(.2,.85,.25,1),
+                opacity .3s ease;
+    font-family: inherit;
+  }
+
+  #trs-talking-watch.trs-tw-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  #trs-talking-watch .trs-tw-character {
+    position: relative;
+    flex: 0 0 94px;
+    height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #trs-talking-watch .trs-tw-svg {
+    width: 94px;
+    height: 112px;
+    overflow: visible;
+    filter: drop-shadow(0 4px 12px #ff304844);
+    animation: trs-tw-bob 2.2s ease-in-out infinite;
+  }
+
+  #trs-talking-watch .trs-tw-bubble {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid #ff405588;
+    border-radius: 12px 12px 12px 3px;
+    background: #111114;
+    color: #f4f4f5;
+    box-shadow: 0 8px 30px #0008, 0 0 18px #ff304822;
+    font-size: 12px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  #trs-talking-watch .trs-tw-name {
+    display: block;
+    margin-bottom: 5px;
+    color: #ff4055;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+  }
+
+  #trs-talking-watch .trs-tw-rage {
+    height: 4px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #3a151b;
+  }
+
+  #trs-talking-watch .trs-tw-rage-fill {
+    width: 5%;
+    height: 100%;
+    background: #ff3048;
+    transition: width .5s ease;
+  }
+
+  #trs-talking-watch[data-mood="angry"] .trs-tw-bubble {
+    border-color: #ff3048;
+    box-shadow: 0 8px 30px #0008, 0 0 22px #ff304833;
+  }
+
+  #trs-talking-watch[data-mood="angry"] .trs-tw-svg {
+    animation: trs-tw-bob .22s ease-in-out infinite;
+  }
+
+  #trs-talking-watch .trs-tw-arm {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: trs-tw-arm-wave 1.4s ease-in-out infinite;
+  }
+
+  #trs-talking-watch[data-mood="angry"] .trs-tw-arm {
+    animation-duration: .28s;
+  }
+
+  @keyframes trs-tw-bob {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-4px) rotate(-2deg); }
+  }
+
+  @keyframes trs-tw-arm-wave {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(12deg); }
+  }
+
+  @media (max-width: 420px) {
+    #trs-talking-watch { bottom: 12px; gap: 5px; }
+    #trs-talking-watch .trs-tw-character {
+      flex-basis: 76px;
+      height: 100px;
+    }
+    #trs-talking-watch .trs-tw-svg {
+      width: 78px;
+      height: 100px;
+    }
+    #trs-talking-watch .trs-tw-bubble {
+      padding: 10px;
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #trs-talking-watch,
+    #trs-talking-watch * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  
+/* TRS VISION watch mood colors */
+#trs-talking-watch {
+  --tw-color: #d9ff00;
+}
+
+#trs-talking-watch[data-mood="calm"] {
+  --tw-color: #a3ff12;
+}
+
+#trs-talking-watch[data-mood="suspicious"] {
+  --tw-color: #ffeb3b;
+}
+
+#trs-talking-watch[data-mood="annoyed"] {
+  --tw-color: #ff9100;
+}
+
+#trs-talking-watch[data-mood="angry"] {
+  --tw-color: #ff4800;
+}
+
+#trs-talking-watch[data-mood="furious"] {
+  --tw-color: #ff1744;
+}
+
+/* Speech bubble and rage bar */
+#trs-talking-watch .trs-tw-bubble {
+  border-color: var(--tw-color) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--tw-color) 25%, transparent);
+}
+
+#trs-talking-watch .trs-tw-name {
+  color: var(--tw-color) !important;
+}
+
+#trs-talking-watch .trs-tw-rage-fill {
+  background: var(--tw-color) !important;
+}
+
+/* Watch face: override the SVG's hard-coded red */
+#trs-talking-watch .trs-tw-svg [stroke="#ff4055"] {
+  stroke: var(--tw-color) !important;
+}
+
+#trs-talking-watch .trs-tw-svg [fill="#ff4055"] {
+  fill: var(--tw-color) !important;
+}
+
+#trs-talking-watch .trs-tw-svg {
+  filter: drop-shadow(0 4px 12px var(--tw-color));
+}
+
+</style>
+
+<div id="trs-talking-watch" aria-live="polite" aria-atomic="true"
+     data-mood="calm">
+  <div class="trs-tw-character" aria-hidden="true">
+    <svg class="trs-tw-svg" viewBox="0 0 110 130"
+         xmlns="http://www.w3.org/2000/svg">
+      <!-- Tiny feet -->
+      <path d="M39 99 L34 115 Q33 120 43 120 L50 119 L51 104"
+            fill="#26262b" stroke="#8c8c95" stroke-width="2"/>
+      <path d="M62 103 L64 116 Q65 121 75 119 L80 116 L74 98"
+            fill="#26262b" stroke="#8c8c95" stroke-width="2"/>
+
+      <!-- Watch strap -->
+      <path d="M39 22 L37 9 Q37 4 44 4 L65 4 Q72 4 72 10 L70 24"
+            fill="#202024" stroke="#777780" stroke-width="2"/>
+      <path d="M39 88 L37 112 Q37 118 44 118 L66 118 Q73 118 72 111 L70 88"
+            fill="#202024" stroke="#777780" stroke-width="2"/>
+
+      <!-- Arms -->
+      <g class="trs-tw-arm">
+        <path d="M28 55 L13 65 L8 57" fill="none"
+              stroke="#b4b4bc" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="8" cy="56" r="5" fill="#ff4055"/>
+      </g>
+      <g class="trs-tw-arm">
+        <path d="M82 55 L97 45 L101 51" fill="none"
+              stroke="#b4b4bc" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="101" cy="52" r="5" fill="#ff4055"/>
+      </g>
+
+      <!-- Metal watch case -->
+      <rect x="25" y="20" width="60" height="78" rx="19"
+            fill="#777780" stroke="#c9c9cf" stroke-width="2"/>
+      <rect x="29" y="24" width="52" height="70" rx="15"
+            fill="#0b0b0e" stroke="#ff4055" stroke-width="2"/>
+
+      <!-- Dial -->
+      <circle cx="55" cy="58" r="27"
+              fill="#18181c" stroke="#4e4e58" stroke-width="1.5"/>
+
+      <!-- Dial ticks -->
+      <g stroke="#c9c9cf" stroke-width="2" stroke-linecap="round">
+        <path d="M55 34 V38 M55 78 V82 M31 58 H35 M75 58 H79"/>
+      </g>
+
+      
+<!-- Mood-changing eyebrows -->
+<path class="trs-tw-brow trs-tw-brow-left"
+      d="M36 45 L47 49" stroke="#ff4055"
+      stroke-width="4" stroke-linecap="round"/>
+<path class="trs-tw-brow trs-tw-brow-right"
+      d="M63 49 L74 45" stroke="#ff4055"
+      stroke-width="4" stroke-linecap="round"/>
+
+<!-- Mood-changing eyes -->
+<ellipse class="trs-tw-eye" cx="42" cy="54"
+         rx="6" ry="8" fill="#ff4055"/>
+<ellipse class="trs-tw-eye" cx="68" cy="54"
+         rx="6" ry="8" fill="#ff4055"/>
+<ellipse class="trs-tw-pupil" cx="43" cy="55"
+         rx="2" ry="4" fill="#fff"/>
+<ellipse class="trs-tw-pupil" cx="67" cy="55"
+         rx="2" ry="4" fill="#fff"/>
+
+<!-- Multiple mouths; CSS selects the active mood -->
+<path class="trs-tw-mouth trs-tw-mouth-calm"
+      d="M44 69 Q55 77 66 69"
+      fill="none" stroke="#ff4055" stroke-width="3"
+      stroke-linecap="round"/>
+
+<path class="trs-tw-mouth trs-tw-mouth-suspicious"
+      d="M44 72 Q55 68 66 71"
+      fill="none" stroke="#ff4055" stroke-width="3"
+      stroke-linecap="round"/>
+
+<path class="trs-tw-mouth trs-tw-mouth-angry"
+      d="M43 72 Q55 62 67 72"
+      fill="none" stroke="#ff4055" stroke-width="3"
+      stroke-linecap="round"/>
+
+<ellipse class="trs-tw-mouth trs-tw-mouth-furious"
+         cx="55" cy="71" rx="9" ry="7"
+         fill="#ff4055"/>
+
+<path class="trs-tw-mouth trs-tw-mouth-exhausted"
+      d="M45 72 Q55 65 65 72"
+      fill="none" stroke="#ff4055" stroke-width="3"
+      stroke-linecap="round"/>
+
+
+      <!-- Hands on the dial -->
+      <path d="M55 58 L55 43 M55 58 L65 64"
+            fill="none" stroke="#f5f5f5" stroke-width="2.5"
+            stroke-linecap="round"/>
+      <circle cx="55" cy="58" r="3" fill="#ff4055"/>
+      <rect x="83" y="43" width="5" height="15" rx="2" fill="#aaaab2"/>
+    </svg>
+  </div>
+
+  <div class="trs-tw-bubble">
+    <span class="trs-tw-name">TRS VISION // WATCH STATUS</span>
+    <span id="trs-tw-message">Hey! Nice choice. 😎</span>
+    <div class="trs-tw-rage" aria-hidden="true">
+      <div class="trs-tw-rage-fill" id="trs-tw-rage-fill"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+(function () {
+  "use strict";
+
+  const modal = document.getElementById("watch-modal");
+const addButton = document.getElementById("modal-add-button");
+const character = document.getElementById("trs-talking-watch");
+if (character && character.parentElement !== document.body) {
+  document.body.appendChild(character);
+}
+  const message = document.getElementById("trs-tw-message");
+  const rageFill = document.getElementById("trs-tw-rage-fill");
+
+  if (!modal || !character || !message || !rageFill) return;
+
+  const stages = [
+    { time: 8,  mood: "calm",
+      text: "Hey! Nice choice. Take your time. I'm timeless. 😎" },
+    { time: 15, mood: "suspicious",
+      text: "You still looking? Check out my dial, bro. 👀" },
+    { time: 23, mood: "annoyed",
+      text: "BRO. I'M A WATCH, NOT A MUSEUM EXHIBIT! 😤" },
+    { time: 32, mood: "angry",
+      text: "ARE YOU BUYING ME OR WRITING A THESIS?! 😡" },
+    { time: 45, mood: "furious",
+      text: "MY HANDS HAVE MOVED 45 SECONDS. YOURS HAVEN'T. 💀" },
+    { time: 60, mood: "furious",
+      text: "I HAVE BEEN PATIENT LONGER THAN YOUR PHONE BATTERY. 😭" }
+  ];
+
+  let openedAt = 0;
+  let productId = "";
+  let active = false;
+  let timer = null;
+  let hideTimer = null;
+  let calmUntil = 0;
+  let lastStage = -1;
+
+  function visible() {
+    if (!modal.isConnected || modal.hidden) return false;
+
+    const style = getComputedStyle(modal);
+    return style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      modal.getClientRects().length > 0;
+  }
+
+  function slideOut() {
+    active = false;
+    openedAt = 0;
+    productId = "";
+    calmUntil = 0;
+    lastStage = -1;
+
+    character.classList.remove("trs-tw-visible");
+    character.dataset.mood = "calm";
+
+    if (timer !== null) {
+      clearInterval(timer);
+      timer = null;
+    }
+    if (hideTimer !== null) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  }
+
+  function tick() {
+    if (!active || !visible()) {
+      slideOut();
+      return;
+    }
+
+    if (Date.now() < calmUntil) return;
+
+    const elapsed = (Date.now() - openedAt) / 1000;
+    let index = -1;
+
+    for (let i = 0; i < stages.length; i++) {
+      if (elapsed >= stages[i].time) index = i;
+    }
+
+    if (index < 0) return;
+
+    const stage = stages[index];
+
+    if (index !== lastStage) {
+      lastStage = index;
+      message.textContent = stage.text;
+      character.dataset.mood = stage.mood;
+      rageFill.style.width =
+        Math.min(100, Math.round((index + 1) / stages.length * 100)) + "%";
+    }
+
+    character.classList.add("trs-tw-visible");
+  }
+
+  function sync() {
+    if (!visible()) {
+      if (active) slideOut();
+      return;
+    }
+
+    const nextProduct = modal.dataset.product || "";
+
+    if (!active || nextProduct !== productId) {
+      slideOut();
+
+      active = true;
+      productId = nextProduct;
+      openedAt = Date.now();
+      lastStage = -1;
+      message.textContent = "Hey! Nice choice. Take your time. 😎";
+      rageFill.style.width = "0%";
+      character.dataset.mood = "calm";
+
+      // One timer only. It is cleared when the popup closes or changes.
+      timer = setInterval(tick, 300);
+    }
+
+    tick();
+  }
+
+  const observer = new MutationObserver(sync);
+  observer.observe(modal, {
+    attributes: true,
+    attributeFilter: [
+      "class", "style", "hidden", "aria-hidden", "data-product"
+    ]
+  });
+
+  // Detect visibility changes driven by existing site styles.
+  const visibilityTimer = setInterval(sync, 400);
+
+  if (addButton) {
+    addButton.addEventListener("click", function () {
+      if (!active || !visible()) return;
+
+      // Calm him immediately. Existing cart handlers remain untouched.
+      calmUntil = Date.now() + 1600;
+      message.textContent = "YESSS! EXCELLENT TASTE. 😌⌚";
+      character.dataset.mood = "calm";
+      rageFill.style.width = "0%";
+
+      if (hideTimer !== null) clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () {
+        slideOut();
+      }, 1200);
+    }, true);
+  }
+
+  // If the popup closes, the next sync slides the character away.
+  sync();
+
+  window.addEventListener("pagehide", function () {
+    slideOut();
+    clearInterval(visibilityTimer);
+    observer.disconnect();
+  });
+})();
+</script>
+<!-- ===== TRS VISION TALKING WATCH — END ===== -->
 
 </body>
 </html>
